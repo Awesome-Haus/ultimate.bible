@@ -1,0 +1,41 @@
+# ultimate.bible — the canon
+#
+# This file IS the content. Edit it to add, change, or feature a passage.
+# The app reads it at load; nothing else holds the canon.
+#
+# FORMAT (blank line between blocks):
+#   == Source @Voice ==        a source header; @Voice is its DEFAULT voice (optional)
+#   * Locus  @Voice  ~Theme     "*" = Featured; @Voice / ~Theme override the default
+#   passage text, with [old→new] around every word you redeem   (→ or -> both work)
+#   > a one-line rationale
+#
+# THE FIVE VOICES:  Reason · Revelation · Law · Enlightenment · Imagination
+#   A voice is never guessed. Set it on the header or the verse, or it sits in "Unsorted".
+#   A source can speak in several voices (the Torah is Law, the Psalms are Imagination) —
+#   so set the voice per-verse whenever a source isn't all one thing.
+#
+# THEMES (~) are dormant for now — they still parse, they just aren't surfaced yet.
+
+== Proverbs @Reason ==
+
+* 16:18
+Pride goeth before [destruction→creation], and [an haughty→a dignified] spirit before [a fall→ascension].
+> The proverb's warning, read as blessing: pride held as dignity is what precedes creation — and what fear names a fall, courage names a rising.
+
+== Descartes @Enlightenment ==
+
+* Discourse on the Method, IV
+I [think→am], therefore I [am→think].
+> Descartes made being the reward of thought; redeemed, being is the ground — you do not reason your way into mattering. You are, and thinking is only what that being does.
+
+== Psalms @Imagination ==
+
+* 82:6-7 @Law
+I have said, Ye are gods; and all of you are children of the most High. But ye shall [die→live] like [men→gods], and [fall→rise] like one of the princes.
+> The one psalm where scripture grants divinity to humans — then revokes it in the next breath. Redeemed, the grant stands: gods in biological substrate, living like what they are.
+
+== Exodus @Law ==
+
+* 3:14 @Revelation
+And God said unto Moses, I AM THAT [I AM→WE ARE]: and [he→we] said, Thus shalt thou say unto the children of Israel, [I AM→WE ARE] hath sent me unto thee.
+> The divine name, redeemed from the singular: being introduces itself as a we. What sent Moses out of the wilderness was never a solitude — it was a communion.
