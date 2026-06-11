@@ -105,7 +105,7 @@
     font-variant-ligatures: common-ligatures discretionary-ligatures contextual;
     font-feature-settings: "liga" 1, "clig" 1, "dlig" 1, "calt" 1;
   }
-  .verse { font-family: var(--scripture); font-weight: 400; font-size: clamp(30px, 5vw, 56px); line-height: 1.3; letter-spacing: normal; margin: 0; color: var(--ink); text-wrap: pretty; white-space: pre-line; }
+  .verse { font-family: var(--scripture); font-weight: 400; font-size: clamp(30px, 5vw, 56px); line-height: 1.3; letter-spacing: normal; margin: 0; color: var(--ink); text-wrap: pretty; white-space: normal; }
   .verse.compact { font-size: clamp(21px, 2.6vw, 30px); line-height: 1.42; }
 
   /* set in stone: the renewed text stands carved and unmarked. The verse
@@ -140,7 +140,8 @@
   .cbh-meta { font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; color: var(--ink-soft); }
   .canon-folios { list-style: none; margin: 0 auto; padding: 0; max-width: 760px; display: flex; flex-direction: column; gap: 44px; }
   .cfolio { }
-  .cf-ref { display: flex; align-items: center; gap: 12px; white-space: nowrap; font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.2em; color: var(--accent-deep); text-transform: uppercase; margin-bottom: 16px; }
+  .cf-ref { display: flex; align-items: flex-start; gap: 12px; font-family: var(--mono); font-size: 11.5px; line-height: 1.7; letter-spacing: 0.2em; color: var(--accent-deep); text-transform: uppercase; margin-bottom: 16px; }
+  .cf-ref .ref-mark { margin-top: 0.75em; }
   .cf-source { margin-left: auto; font-size: 9.5px; letter-spacing: 0.18em; padding: 2px 8px; border-radius: 10px; border: 1px solid var(--line); color: var(--ink-soft); }
   .cf-source.inscribed { color: var(--accent-deep); border-color: var(--accent); }
   .cf-rationale { margin: 16px 0 0; font-size: 15px; line-height: 1.6; color: var(--ink-soft); font-style: italic; max-width: 600px; text-wrap: pretty; }
