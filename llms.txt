@@ -17,11 +17,11 @@ The throughline is a single move: wherever a text pronounces doom, vanity, fate,
 
 The canon draws from five testaments — bodies of witness, not places. A single source can span more than one (the Torah is Law; the Psalms are Imagination), so each passage names its own.
 
-- **Reason** — Greek philosophy (Socrates, Heraclitus, the Stoics)
+- **Reason** — Greek philosophy (Socrates, Plato, Heraclitus, the Stoics)
 - **Revelation** — scripture
-- **Law** — Rome, the jurists, the civic order (Cicero, Tacitus)
-- **Enlightenment** — the moderns (Hobbes, Locke, Rousseau, Kant, the Founders)
-- **Imagination** — the poets (Shakespeare, Milton, Shelley)
+- **Law** — Rome, the jurists, the civic order (Cicero, Tacitus, Hobbes)
+- **Enlightenment** — the moderns (Rousseau, Pascal, Kant, Nietzsche, the Founders)
+- **Imagination** — the poets (Sophocles, Shakespeare, Milton, Yeats, Dante, Ovid)
 
 ## Structure
 
@@ -37,4 +37,7 @@ The canon draws from five testaments — bodies of witness, not places. A single
 
 Proverbs 16:18 —
 - Original: *"Pride goeth before destruction, and an haughty spirit before a fall."*
-- Renewed: *"Pride goeth before creation, and a dignified spirit before ascension."*
+- Renewed: *"Pride goes before creation, and a dignified spirit before ascension."*
+
+(The original keeps its King James voice verbatim; the renewal speaks modern English —
+archaisms turn along with the doom.)
