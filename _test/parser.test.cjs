@@ -52,41 +52,41 @@ eq(recs.length, 6, "six records across one header-less + four headers");
 // --- header-less full reference at top of file (source derived from the book) ---
 const matt = bySource(recs, "Matthew");
 eq(matt.display, "Matthew 5 : 5", "header-less Bible ref display");
-eq(matt.voice, "Revelation", "header-less entry @Voice");
+eq(matt.testament, "Revelation", "header-less entry @Testament");
 eq(matt.book, "Matthew", "header-less source derived from scripture book");
 
-// --- header source + non-Bible display + voice-from-header ---
+// --- header source + non-Bible display + testament-from-header ---
 const soc = bySource(recs, "Socrates");
-eq(soc.voice, "Reason", "Socrates voice inherited from header");
+eq(soc.testament, "Reason", "Socrates testament inherited from header");
 eq(soc.theme, "Self", "theme tag parsed");
 eq(soc.display, "Socrates — Apology, 38a", "non-Bible display: source — locus");
 eq(soc.reference, "Socrates Apology, 38a", "reference = source + locus");
 ok(soc.featured === true, "featured * survives tags");
-eq(P.rectifiedText(soc), "The examined life is not worth living.", "rectified round-trip");
+eq(P.renewedText(soc), "The examined life is not worth living.", "renewed round-trip");
 
 // --- Bible under header: locus joins source, pretty display, scripture parse ---
 const gen319 = recs.find((r) => r.source === "Genesis" && r.chapter === 3);
 eq(gen319.display, "Genesis 3 : 19", "Bible pretty ' : ' display");
-eq(gen319.voice, "Revelation", "entry @Voice set (header had none)");
+eq(gen319.testament, "Revelation", "entry @Testament set (header had none)");
 eq(gen319.theme, "Ground", "Bible theme tag");
 eq([gen319.book, gen319.chapter, gen319.verse], ["Genesis", 3, "19"], "scripture parsed");
 
-// --- no voice anywhere -> null (Unsorted handled in the view) ---
+// --- no testament anywhere -> null (Unsorted handled in the view) ---
 const gen13 = recs.find((r) => r.source === "Genesis" && r.chapter === 1);
-eq(gen13.voice, null, "no @Voice + no header default -> null");
+eq(gen13.testament, null, "no @Testament + no header default -> null");
 
-// --- per-source default voice inherited when entry omits @Voice ---
+// --- per-source default testament inherited when entry omits @Testament ---
 const cic = bySource(recs, "Cicero");
-eq(cic.voice, "Law", "Cicero voice inherited from header default");
+eq(cic.testament, "Law", "Cicero testament inherited from header default");
 eq(cic.display, "Cicero — De Legibus, I.42", "Cicero display");
 
-// --- Leviticus voice override + theme ---
+// --- Leviticus testament override + theme ---
 const lev = bySource(recs, "Leviticus");
-eq(lev.voice, "Law", "Leviticus entry @Law");
+eq(lev.testament, "Law", "Leviticus entry @Law");
 eq(lev.theme, "Justice", "Leviticus theme");
 
-// --- voice canonicalization (case-insensitive) ---
-eq(P.parseHeader("== Plato @reason ==").voice, "Reason", "lowercase voice canonicalized");
+// --- testament canonicalization (case-insensitive) ---
+eq(P.parseHeader("== Plato @reason ==").testament, "Reason", "lowercase testament canonicalized");
 eq(P.parseHeader("== Plato @reason ==").source, "Plato", "header source parsed");
 
 // --- edge cases ---

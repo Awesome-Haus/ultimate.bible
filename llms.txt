@@ -1,21 +1,21 @@
-# Ultimate.Bible — The Redeemed Word
+# Ultimate Bible — The Lasting Word
 
-> Ultimate.Bible redeems the foundational words of Western civilization. It takes a canonical line — scripture, philosophy, law, Enlightenment, or poetry — strikes the word that wounds, and sets in its place the word that frees: a warning turned to a blessing, with the verbatim original left intact and visible beneath the change.
+> Ultimate Bible renews the foundational words of Western civilization. It takes a canonical line — scripture, philosophy, law, Enlightenment, or poetry — strikes the word that wounds, and sets in its place the word that frees: a warning turned to a blessing, with the verbatim original left intact and visible beneath the change.
 
-It is an act of reverent reclamation — not mockery, not doctrine, not a replacement gospel. A *reading*, not a new scripture. The method is deliberately surgical: change as few words as possible, keep the rest exact, and let the redeemed line stand against the original so the reader sees precisely what turned.
+Ultimate Bible is the Word, saved and renewed. The method is deliberately surgical: change as few words as possible, keep the rest exact, and let the renewed line stand against the original so the reader sees precisely what turned.
 
-The throughline is a single move: wherever a text pronounces doom, vanity, fate, or smallness, the redemption shows it saying the opposite — a turn toward agency and dignity.
+The throughline is a single move: wherever a text pronounces doom, vanity, fate, or smallness, the renewal shows it saying the opposite — a turn toward agency and dignity. "Behold, we make all things new."
 
 ## The method
 
-- A **Redemption** is one passage, redeemed. Every word outside the changes is the verbatim original (e.g. the King James Version for scripture); only the marked words differ.
-- Each changed word is an **Indemnification** — literally an *un-damning* (Latin *in-* + *damnum*, "without loss or harm"). A passage may hold several.
-- Every Redemption carries a one-line **rationale**: why the warning was always a blessing.
-- Sources are **public-domain** and quoted **verbatim**. The famous lines are often misremembered, so each is verified before it enters the canon.
+- A **Renewal** is one passage, renewed. Every word outside the changes is the verbatim original (e.g. the King James Version for scripture); only the marked words differ.
+- Each changed word is itself a **renewal**. A passage may hold several.
+- The renewals stand **unexplained** — the renewed line against its verbatim original, left for the reader to contemplate, not told what to contemplate.
+- Sources are **public-domain** and quoted **verbatim**. The famous lines are often misremembered, so each is verified before it enters the canon (see [SOURCES.md](https://ultimate.bible/SOURCES.md)).
 
-## The Five Voices
+## The Five Testaments
 
-The canon draws from five voices — modes of thought, not places. A single source can speak in more than one (the Torah is Law; the Psalms are Imagination), so each passage names its own.
+The canon draws from five testaments — bodies of witness, not places. A single source can span more than one (the Torah is Law; the Psalms are Imagination), so each passage names its own.
 
 - **Reason** — Greek philosophy (Socrates, Heraclitus, the Stoics)
 - **Revelation** — scripture
@@ -25,15 +25,16 @@ The canon draws from five voices — modes of thought, not places. A single sour
 
 ## Structure
 
-- **Featured** — a curated spotlight of redemptions; the front door.
-- **The Canon** — the full body, browsable by **Voice** or by **Source**.
+- **The Canon** is the whole site: the full body of renewals, read by **Testament**.
+  Every passage carries its citation ("Renewed from —"), so any source can be
+  searched directly.
 
 ## The canon (live content)
 
-- [canon.txt](https://ultimate.bible/canon.txt): the entire canon in plain text — the source of truth. Each entry is a source header, a citation, the redeemed line written as `[original→redeemed]`, and a rationale. This file *is* the canon; the website only renders it.
+- [canon.txt](https://ultimate.bible/canon.txt): the entire canon in plain text — the source of truth. Each entry is a source header, a citation, and the renewed line written as `[original→renewed]`. This file *is* the canon; the website only renders it.
 
 ## Example
 
 Proverbs 16:18 —
 - Original: *"Pride goeth before destruction, and an haughty spirit before a fall."*
-- Redeemed: *"Pride goeth before creation, and a dignified spirit before ascension."*
+- Renewed: *"Pride goeth before creation, and a dignified spirit before ascension."*

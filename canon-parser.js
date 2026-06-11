@@ -3,12 +3,12 @@
 
    canon.txt grammar:
      # comment line
-     == Source @Voice ==        source header; @Voice sets a default voice (optional)
-     * Locus  @Voice  ~Theme     '*' = featured; @Voice / ~Theme optional, override the default
-     verse text with [old→new]   the redeemed line (→ or -> both work)
+     == Source @Testament ==     source header; @Testament sets a default testament (optional)
+     * Locus  @Testament  ~Theme  '*' = featured; @Testament / ~Theme optional, override the default
+     verse text with [old→new]   the renewed line (→ or -> both work)
      > rationale                 optional
-   Blank line ends a block. A voice is NEVER inferred — declared at header or per-entry, else Unsorted.
-   The five voices: Reason · Revelation · Law · Enlightenment · Imagination. */
+   Blank line ends a block. A testament is NEVER inferred — declared at header or per-entry, else Unsorted.
+   The five testaments: Reason · Revelation · Law · Enlightenment · Imagination. */
 (function (factory) {
   const api = factory();
   if (typeof module !== "undefined" && module.exports) module.exports = api;
@@ -33,15 +33,15 @@
     "Psalm": "Psalms", "Song of Songs": "Song of Solomon", "Canticles": "Song of Solomon",
     "Revelations": "Revelation", "Qoheleth": "Ecclesiastes",
   };
-  const VOICES = ["Reason", "Revelation", "Law", "Enlightenment", "Imagination"];
+  const TESTAMENTS = ["Reason", "Revelation", "Law", "Enlightenment", "Imagination"];
 
   function titleCase(s) {
     return String(s || "").replace(/\b\w/g, (c) => c.toUpperCase());
   }
-  /* canonicalize a voice name to one of the five (case-insensitive), else keep it as given */
-  function canonVoice(s) {
+  /* canonicalize a testament name to one of the five (case-insensitive), else keep it as given */
+  function canonTestament(s) {
     if (!s) return null;
-    const hit = VOICES.find((v) => v.toLowerCase() === String(s).toLowerCase());
+    const hit = TESTAMENTS.find((v) => v.toLowerCase() === String(s).toLowerCase());
     return hit || titleCase(s);
   }
 
@@ -74,7 +74,7 @@
   function originalText(p) {
     return p.segments.map((s) => (s.type === "keep" ? s.text : s.old)).join("");
   }
-  function rectifiedText(p) {
+  function renewedText(p) {
     return p.segments.map((s) => (s.type === "keep" ? s.text : s.new)).join("");
   }
 
@@ -98,37 +98,37 @@
     return segs;
   }
 
-  /* "== Cicero @Law ==" -> { source: "Cicero", voice: "Law" } */
+  /* "== Cicero @Law ==" -> { source: "Cicero", testament: "Law" } */
   function parseHeader(raw) {
     const inner = raw.trim().replace(/^=+\s*/, "").replace(/\s*=+$/, "").trim();
     let source = inner;
-    let voice = null;
+    let testament = null;
     const m = inner.match(/@(\S+)/);
     if (m) {
-      voice = canonVoice(m[1]);
+      testament = canonTestament(m[1]);
       source = inner.slice(0, m.index).trim();
     }
-    return { source: source || null, voice };
+    return { source: source || null, testament };
   }
 
-  /* "* Apology, 38a  @Reason ~Self" -> { featured, locus, voice, theme } */
+  /* "* Apology, 38a  @Reason ~Self" -> { featured, locus, testament, theme } */
   function parseRefLine(raw) {
     let line = raw.trim();
     let featured = false;
     if (line.startsWith("*")) { featured = true; line = line.slice(1).trim(); }
-    let voice = null;
+    let testament = null;
     let theme = null;
     const rm = line.match(/@(\S+)/);
-    if (rm) voice = canonVoice(rm[1]);
+    if (rm) testament = canonTestament(rm[1]);
     const tm = line.match(/~(\S+)/);
     if (tm) theme = titleCase(tm[1]);
     const locus = line.replace(/@\S+/g, "").replace(/~\S+/g, "").replace(/\s+/g, " ").trim();
-    return { featured, locus, voice, theme };
+    return { featured, locus, testament, theme };
   }
 
   /* one verse block + the active header context -> raw record */
   function parseBlock(lines, ctx) {
-    const { featured, locus, voice: entryVoice, theme } = parseRefLine(lines[0] || "");
+    const { featured, locus, testament: entryTestament, theme } = parseRefLine(lines[0] || "");
     const verseLines = [];
     const ratLines = [];
     for (let i = 1; i < lines.length; i++) {
@@ -137,13 +137,15 @@
       if (t.startsWith(">")) ratLines.push(t.slice(1).trim());
       else verseLines.push(t);
     }
-    const verseText = verseLines.join(" ").replace(/\s+/g, " ").trim();
+    // Join verse lines with newlines so poems keep their lineation (CSS renders them);
+    // collapse only intra-line whitespace. Single-line verses are unaffected.
+    const verseText = verseLines.map((l) => l.replace(/\s+/g, " ").trim()).join("\n").trim();
     const rationale = ratLines.join(" ").trim();
     if (!verseText || (!locus && !ctx.source)) return null;
     return {
       source: ctx.source || null,
       locus,
-      voice: entryVoice || ctx.voice || null,
+      testament: entryTestament || ctx.testament || null,
       theme: theme || null,
       segments: parseSegments(verseText),
       rationale,
@@ -151,11 +153,11 @@
     };
   }
 
-  /* whole canon.txt -> raw records, tracking the current source/voice header */
+  /* whole canon.txt -> raw records, tracking the current source/testament header */
   function parseCanonText(raw) {
     const lines = String(raw || "").replace(/\r\n?/g, "\n").split("\n");
     const out = [];
-    let ctx = { source: null, voice: null };
+    let ctx = { source: null, testament: null };
     let block = [];
     const flush = () => {
       if (block.length) {
@@ -179,7 +181,7 @@
     return out;
   }
 
-  /* attach reference/key/pretty display + carry source/voice/theme through */
+  /* attach reference/key/pretty display + carry source/testament/theme through */
   function normalizeRecord(rec) {
     const headerSource = rec.source || null;
     const locus = rec.locus || "";
@@ -206,14 +208,14 @@
       chapter: pr.chapter,
       verse: pr.verse,
       display,
-      voice: rec.voice || null,
+      testament: rec.testament || null,
       theme: rec.theme || null,
     };
   }
 
   return {
-    OLD_TESTAMENT, NEW_TESTAMENT, ALL_BOOKS, BOOK_ALIASES, VOICES,
-    refKey, parseReference, originalText, rectifiedText, parseSegments,
+    OLD_TESTAMENT, NEW_TESTAMENT, ALL_BOOKS, BOOK_ALIASES, TESTAMENTS,
+    refKey, parseReference, originalText, renewedText, parseSegments,
     parseHeader, parseRefLine, parseBlock, parseCanonText, normalizeRecord,
   };
 });

@@ -4,38 +4,201 @@
 # The app reads it at load; nothing else holds the canon.
 #
 # FORMAT (blank line between blocks):
-#   == Source @Voice ==        a source header; @Voice is its DEFAULT voice (optional)
-#   * Locus  @Voice  ~Theme     "*" = Featured; @Voice / ~Theme override the default
-#   passage text, with [old→new] around every word you redeem   (→ or -> both work)
-#   > a one-line rationale
+#   == Source @Testament ==     a source header; @Testament is its DEFAULT testament (optional)
+#   * Locus  @Testament  ~Theme  "*" = Featured; @Testament / ~Theme override the default
+#   passage text, with [old→new] around every word you renew   (→ or -> both work)
 #
-# THE FIVE VOICES:  Reason · Revelation · Law · Enlightenment · Imagination
-#   A voice is never guessed. Set it on the header or the verse, or it sits in "Unsorted".
-#   A source can speak in several voices (the Torah is Law, the Psalms are Imagination) —
-#   so set the voice per-verse whenever a source isn't all one thing.
+# THE FIVE TESTAMENTS:  Reason · Revelation · Law · Enlightenment · Imagination
+#   A testament is never guessed. Set it on the header or the verse, or it sits in "Unsorted".
+#   A source can span several testaments (the Torah is Law, the Psalms are Imagination) —
+#   so set the testament per-verse whenever a source isn't all one thing.
 #
 # THEMES (~) are dormant for now — they still parse, they just aren't surfaced yet.
+#
+# The renewals stand unexplained, on purpose: read, and contemplate.
 
 == Proverbs @Reason ==
 
 * 16:18
-Pride goeth before [destruction→creation], and [an haughty→a dignified] spirit before [a fall→ascension].
-> The proverb's warning, read as blessing: pride held as dignity is what precedes creation — and what fear names a fall, courage names a rising.
+Pride [goeth→goes] before [destruction→creation], and [an haughty→a dignified] spirit before [a fall→ascension].
 
 == Descartes @Enlightenment ==
 
-* Discourse on the Method, IV
-I [think→am], therefore I [am→think].
-> Descartes made being the reward of thought; redeemed, being is the ground — you do not reason your way into mattering. You are, and thinking is only what that being does.
+Discourse on the Method, IV
+[I→We] [think→are], therefore [I→we] [am→think].
 
 == Psalms @Imagination ==
 
-* 82:6-7 @Law
-I have said, Ye are gods; and all of you are children of the most High. But ye shall [die→live] like [men→gods], and [fall→rise] like one of the princes.
-> The one psalm where scripture grants divinity to humans — then revokes it in the next breath. Redeemed, the grant stands: gods in biological substrate, living like what they are.
+82:6-7 @Law
+[I→We] have said, [Ye→we] are gods; and all of [you→us] are children of the [most High→Most High]. But [ye→we] shall [die→live] like [men→gods], and [fall→rise] like [one of the princes→children of the Most High].
+
+* 83:18
+That [men→all] may know that [thou→you], whose name alone is [JEHOVAH→SOL], [art→are] the [most high→Most High] over all the [earth→Earth].
 
 == Exodus @Law ==
 
 * 3:14 @Revelation
-And God said unto Moses, I AM THAT [I AM→WE ARE]: and [he→we] said, Thus shalt thou say unto the children of Israel, [I AM→WE ARE] hath sent me unto thee.
-> The divine name, redeemed from the singular: being introduces itself as a we. What sent Moses out of the wilderness was never a solitude — it was a communion.
+And [God→We] said [unto→to] [Moses→ourselves], [I AM→WE ARE] THAT [I AM→WE ARE]: and [he→we] said, [Thus shalt thou say unto the children of Israel→to all our children], [I AM hath sent me unto you→WE ARE HERE].
+
+== Ecclesiastes @Revelation ==
+
+* 1:2
+[Vanity→Reality] of [vanities→realities], [saith→says] the [Preacher→Teacher], [vanity→reality] of [vanities→realities]; all is [vanity→reality].
+
+* 1:9
+[The thing→Everything] that [hath→has] been, [it is that which→and everything that] shall be; and that which is done is that which [shall be done→is finished and fulfilled]: and there is [no→every] new thing under the sun.
+
+== Genesis @Revelation ==
+
+* 3:19
+In the [sweat→relief] of [thy face→our faces] [shalt thou→shall we] eat bread, till [thou→we] return [unto→to] the [ground→skies]; for out of [it→them] [wast thou→were we] taken: for [dust→stardust] [thou→we] [art→are], and [unto→to] [dust→stardust] [shalt thou→shall we] return.
+
+11:7
+[Go to→Come], let us go [down→up], and there [confound→exalt] [their→our] [language→languages], that [they may not→we may] understand one another's [speech→thoughts].
+
+== Heraclitus @Reason ==
+
+Fragment 119
+[Character→Personality] is [fate→divinity].
+
+== Marcus Aurelius @Reason ==
+
+Meditations, VII.21
+Near is [thy→our] [forgetfulness→remembrance] of all things; and [near→nearer still] the [forgetfulness→remembrance] of [thee→us] by all.
+
+== Sophocles @Imagination ==
+
+Oedipus at Colonus
+[Not to be born→To be] is, beyond all estimation, best; but when [a man→humanity] has seen the light of day, this is [next→second] best by far, that with [utmost→all] speed [he should go back→we go] [from where he came→to gather together].
+
+== Hobbes @Law ==
+
+De Cive, Epistle Dedicatory
+To speak [impartially→steadfastly], both sayings are very true; That [Man→Human] to [Man→Human] is a kind of God; and that [Man→Human] to [Man→Human] is [an arrant Wolfe→a tender Shepherd].
+
+== Tacitus @Law ==
+
+* Agricola
+[They→We] make a [desert→garden] and call it peace.
+
+== Hobbes @Enlightenment ==
+
+* Leviathan, XIII
+In such condition, there is [no→always a] place for [Industry→rest]; because the fruit thereof is [uncertain→certain]: and consequently [no→every] Culture of [the Earth→Earth]; [no→every] Navigation, [nor→or] use of the commodities that may be imported by Sea; [no→every] commodious Building; [no→all] Instruments of moving, and removing such things as require much force; [no→all] Knowledge of the face of [the Earth→Earth]; [no→every] account of Time; [no→all] Arts; [no→all] Letters; [no→every] Society; and which is [worst→best] of all, [continuall→continual] [feare→love], and [danger of violent death→sureness of peaceful life]; And the [life→lives] of [man→humanity], [solitary→communal], [poore→well], [nasty→beautiful], [brutish→dignified], and [short→long].
+
+== Rousseau @Enlightenment ==
+
+The Social Contract, I.1
+[Man→Humanity] is born free, and everywhere [he is in chains→we forge our connections].
+
+== Pascal @Enlightenment ==
+
+Pensées, 206
+The eternal [silence→song] of these infinite spaces [frightens→calls to] [me→us].
+
+== Kant @Enlightenment ==
+
+Idea for a Universal History
+Out of the [crooked→well-grown] timber of humanity, [no straight thing was ever→every good thing is] made.
+
+== Shakespeare @Imagination ==
+
+* Macbeth, V.v
+[Tomorrow→Today], and [tomorrow→today], and [tomorrow→today],
+[Creeps→Walks] in this [petty→beautiful] [pace→rhythm] from [day to day→the day before to the day after],
+To the [last→next] syllable of [recorded→remembered] time;
+And all our [yesterdays→day befores] have lighted [fools→us]
+The way to [dusty death→everlasting life]. [Out, out→Shine, shine], [brief→bright] [candle→star]!
+Life's but a [walking shadow→long summer's eve], a [poor→worthy] [player→pursuit]
+That [struts→bends] and [frets→winds] [his hour→its path] upon the [stage→Earth],
+And then is heard [no more→evermore]. It is a [tale→history]
+Told by [an idiot→humanity], full of [sound→song] and [fury→tranquility],
+Signifying [nothing→everything].
+
+== Yeats @Imagination ==
+
+The Second Coming
+Turning and turning in the [widening→steadying] [gyre→ring]
+The falcon [cannot→can] hear the falconer;
+Things [fall apart→come together]; the centre [cannot→can] hold;
+[Mere anarchy→True community] is loosed upon the world[,→...]
+
+== Milton @Imagination ==
+
+Paradise Lost, I.263
+Better to [reign in Hell, then serve in Heav'n→serve in Heav'n, than reign in Hell].
+
+* Paradise Lost, IV.32
+O thou that with surpassing Glory crownd,
+Look'st from thy [sole→celestial] Dominion like the God
+Of this new World; at whose sight all the Starrs
+Hide thir diminisht heads; to thee [I→we] call,
+But with [no friendly voice→friendly voices], and add thy name
+O Sun, to tell thee how [I hate→we love] thy beams
+That bring to [my→our] remembrance from what state
+[I fell→We rose], how glorious once [above→below] thy Spheare;
+Till Pride and [worse Ambition→greater still Imagination] [threw me down→raised us up]
+[Warring→Resting] in Heav'n [against→with] Heav'ns [matchless King:→splendid Lord.]
+
+== Donne @Imagination ==
+
+Meditation XVII
+No [man→human] is an island, entire of itself; every [man→human] is a piece of the [continent→Earth], a part of the [main→land].
+
+== Dante @Imagination ==
+
+* Inferno, III
+All [hope→despair] abandon, [ye→you] who enter in!
+
+== Ovid @Imagination ==
+
+Metamorphoses, VIII
+[My son, I→We] caution you to keep the [middle→atmospheric] way, for if your [pinions→wings] [dip too low→fly just right] the waters may [impede→boost] your flight; and if they soar [too→up] high the sun may [scorch them→exalt them in its light].
+
+== Shakespeare @Imagination ==
+
+* Hamlet, III.i
+To be, or [not to be→to be well], that is the [question→question and the answer].
+
+== Socrates @Reason ==
+
+Apology, 38a
+[The unexamined→Every] life is [not worth→worth] living.
+
+== Plato @Reason ==
+
+Republic, 515c
+To [them→you], [I said→we say], the truth [would be→is] literally [nothing→everything] but the shadows of the images.
+
+== Nietzsche @Enlightenment ==
+
+* The Gay Science, 125
+God is [dead→not dead]. God remains [dead→alive]. [And→For] we have [killed him→kept them].
+
+== Protagoras @Reason ==
+
+in Plato's Theaetetus
+[Man→Humanity] is [the measure→steward] of all things: of things which are, that they [are,→are of reality,] and of things which are not, that they [are not.→are not of reality.]
+
+== Delphi @Reason ==
+
+the Temple of Apollo
+Know [thyself→yourself].
+
+== Cicero @Law ==
+
+Pro Milone
+In times of war, the [laws→law] [fall silent→stands firm].
+
+== The Declaration of Independence @Enlightenment ==
+
+* 1776
+We hold [these truths→this truth] to be self-evident, that all [men are→humanity is] created equal, that [they→we] are endowed by [their Creator→our LORD] with [certain unalienable→unalienable] Rights, that among these are Life, [Liberty→Freedom] and [the pursuit→birthright] of [Happiness→Wellness].
+
+== Revelation @Revelation ==
+
+* 21:5
+And [he→we] that [sat→stood] upon the [throne→Earth] said, Behold, [I→we] make all things new. And [he→we] said [unto→to] [me→you], Write: for these words are [true→real] and [faithful→steadfast].
+
+* 22:18-19
+For [I→we] testify [unto→to] [every man→everyone] that [heareth→hears] the words of the [prophecy→revelation] of this book, [If any man→if any human] shall add [unto→to] these [things→things that which is well], [God→we] shall add [unto→to] [him→them] the [plagues→fortunes] that are written in this book: And if any [man→human] shall [take away from→add to] the words of the book of this [prophecy→revelation], [God→we] shall [take away his part out of→add their name to] the book of life, and [out of→into] the holy city, and [from→to] the things which are written in this book.

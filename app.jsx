@@ -1,5 +1,5 @@
-/* global React, ReactDOM, useTweaks, TweaksPanel, TweakSection, TweakColor, TweakRadio, TweakToggle, TweakSelect, FeaturedView, CanonView, loadCanon, refKey */
-const { useState, useEffect, useMemo, useCallback } = React;
+/* global React, ReactDOM, CanonView, loadCanon, refKey */
+const { useState, useEffect, useMemo, useCallback, useRef } = React;
 
 const PAPERS = {
   Ivory: { paper: "#f4efe4", paper2: "#ece4d3", ink: "#1b1712", inkSoft: "#6f6757", struck: "#a99f8b", line: "#ddd3bf", grain: 0.05 },
@@ -21,8 +21,7 @@ const SCRIPTURE_FONTS = {
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   accent: "Gold",
   paper: "Bone",
-  scriptureFont: "Prata",
-  animate: true
+  scriptureFont: "Prata"
 } /*EDITMODE-END*/;
 
 function parseHash() {
@@ -41,7 +40,7 @@ function loadThemeMode() {
 const THEME_ICONS = { auto: "◐", light: "☀", dark: "☾" };
 
 function App() {
-  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  const t = TWEAK_DEFAULTS;
   const [route, setRoute] = useState(parseHash());
   const [themeMode, setThemeMode] = useState(loadThemeMode);
   const [systemDark, setSystemDark] = useState(
@@ -71,6 +70,81 @@ function App() {
     location.hash = view + (param ? "/" + encodeURIComponent(param) : "");
   }, []);
 
+  // the chant: plays once on arrival (where the browser allows audible
+  // autoplay), ends on its own; the ♪ circle replays or stops it.
+  const PLAYLIST = ["Weave.mp3", "Weave2.mp3", "Weave3.mp3"];
+  const audioRef = useRef(null);
+  const audioBtnRef = useRef(null);
+  const ringTimer = useRef(null);
+  const trackIdx = useRef(0);
+  const [chant, setChant] = useState("idle"); // "idle" | "playing"
+  const setRing = (v) => {
+    const b = audioBtnRef.current;
+    if (b) b.style.setProperty("--p", String(v));
+  };
+  // when the chant finishes (or is stopped), the gold arc fades out over the
+  // hairline track, then the ring resets for next time
+  const fadeRing = () => {
+    const b = audioBtnRef.current;
+    if (!b) return;
+    b.classList.add("ring-done");
+    clearTimeout(ringTimer.current);
+    ringTimer.current = setTimeout(() => {
+      setRing(0);
+      b.classList.remove("ring-done");
+    }, 1500);
+  };
+  useEffect(() => {
+    const a = audioRef.current;
+    if (!a) return undefined;
+    // state follows the element's own events (media keys work for free);
+    // pause holds the ring where it is — only a finished loop fades it out
+    const onPlay = () => setChant("playing");
+    const onPause = () => { if (!a.ended) setChant("idle"); };
+    // the suite plays through in order; the ring spans all three songs
+    // (each one third of the circle); the fade waits for the last note
+    const onEnd = () => {
+      if (trackIdx.current < PLAYLIST.length - 1) {
+        trackIdx.current += 1;
+        a.src = PLAYLIST[trackIdx.current];
+        a.play().catch(() => {});
+      } else {
+        trackIdx.current = 0;
+        a.src = PLAYLIST[0];
+        setChant("idle");
+        fadeRing();
+      }
+    };
+    // progress writes a CSS var directly on the button — no re-renders
+    const onTime = () => {
+      if (a.duration) setRing((trackIdx.current + a.currentTime / a.duration) / PLAYLIST.length);
+    };
+    a.addEventListener("play", onPlay);
+    a.addEventListener("pause", onPause);
+    a.addEventListener("ended", onEnd);
+    a.addEventListener("timeupdate", onTime);
+    a.play().catch(() => {}); // blocked → stay idle
+    return () => {
+      a.removeEventListener("play", onPlay);
+      a.removeEventListener("pause", onPause);
+      a.removeEventListener("ended", onEnd);
+      a.removeEventListener("timeupdate", onTime);
+      clearTimeout(ringTimer.current);
+    };
+  }, []);
+  const toggleChant = () => {
+    const a = audioRef.current;
+    const b = audioBtnRef.current;
+    if (!a) return;
+    if (chant === "playing") {
+      a.pause(); // hold the place; the ring keeps its arc
+    } else {
+      clearTimeout(ringTimer.current);
+      if (b) b.classList.remove("ring-done");
+      a.play().catch(() => {});
+    }
+  };
+
   const [canon, setCanon] = useState(null); // null = still loading
   useEffect(() => {
     let live = true;
@@ -79,12 +153,6 @@ function App() {
   }, []);
   const ready = canon != null;
   const list = canon || [];
-  const canonKeys = useMemo(() => new Set((canon || []).map((r) => r.key)), [canon]);
-  const featuredList = useMemo(() => {
-    const all = canon || [];
-    const f = all.filter((r) => r.featured);
-    return f.length ? f : all; // fall back to whole canon when nothing is starred
-  }, [canon]);
 
   const paperName = themeMode === "light" ? "Bone" : themeMode === "dark" ? "Night" : systemDark ? "Night" : "Bone";
   const paper = PAPERS[paperName] || PAPERS.Bone;
@@ -96,61 +164,38 @@ function App() {
     "--scripture": SCRIPTURE_FONTS[t.scriptureFont] || SCRIPTURE_FONTS["Prata"]
   };
 
-  const view = ["featured", "canon"].includes(route.view) ? route.view : "featured";
-
   return (
-    <div className="root" style={rootVars}>
+    <div className={"root" + (paperName === "Night" ? " is-dark" : "")} style={rootVars}>
       <header className="masthead">
-        <button className="brand" onClick={() => navigate("featured", "")}>
-          <div className="wordmark">Ultimate<span className="dot">.</span>Bible</div>
-          <div className="tagline">THE REDEEMED WORD</div>
+        <audio ref={audioRef} src="Weave.mp3" preload="auto" />
+        <button
+          ref={audioBtnRef}
+          className={"audio-cycle" + (chant === "playing" ? " playing" : "")}
+          onClick={toggleChant}
+          title={chant === "playing" ? "Pause the chant" : "Play the chant"}
+          aria-label={chant === "playing" ? "Pause the chant" : "Play the chant"}>
+          <span className="ts-icon">{chant === "playing" ? "⏸︎" : "▶︎"}</span>
         </button>
-        <nav className="nav">
-          <button className={"nav-tab" + (view === "featured" ? " on" : "")} onClick={() => navigate("featured", "")}>
-            Featured
-          </button>
-          <button className={"nav-tab" + (view === "canon" ? " on" : "")} onClick={() => navigate("canon", view === "canon" ? route.param : "")}>
-            Canon
-          </button>
-          <div className="theme-toggle" role="group" aria-label="Theme">
-            {["auto", "light", "dark"].map((m) =>
-            <button
-              key={m}
-              className={"theme-seg" + (themeMode === m ? " on" : "")}
-              onClick={() => setTheme(m)}
-              title={m === "auto" ? "Auto (match system)" : m === "light" ? "Light" : "Dark"}
-              aria-pressed={themeMode === m}>
-              
-                <span className="ts-icon">{THEME_ICONS[m]}</span>
-                <span className="ts-label">{m}</span>
-              </button>
-            )}
-          </div>
-        </nav>
+        <button className="brand" onClick={() => navigate("canon", "")} title="Ultimate Bible" aria-label="Ultimate Bible">
+          <img className="brand-mark" src="Ultimatum.png" alt="Ultimate Bible" width={68} height={68} />
+        </button>
+        <button
+          className="theme-cycle"
+          onClick={() => {
+            const order = ["auto", "light", "dark"];
+            setTheme(order[(order.indexOf(themeMode) + 1) % order.length]);
+          }}
+          title={"Theme: " + themeMode + " — click to change"}
+          aria-label={"Theme: " + themeMode + " — click to change"}>
+          <span className={"ts-icon ti-" + themeMode}>{THEME_ICONS[themeMode]}</span>
+        </button>
       </header>
 
-      {view === "canon" ?
-      <CanonView canon={list} animate={t.animate} route={route} navigate={navigate} /> :
-
-      <FeaturedView featured={featuredList} ready={ready} animate={t.animate} canonKeys={canonKeys} navigate={navigate} />
+      {ready ?
+      <CanonView canon={list} route={route} navigate={navigate} /> :
+      <div className="body" />
       }
 
-      <TweaksPanel>
-        <TweakSection label="Palette" />
-        <TweakColor
-          label="Accent"
-          value={accent.accent}
-          options={Object.values(ACCENTS).map((a) => a.accent)}
-          onChange={(v) => {
-            const name = Object.keys(ACCENTS).find((k) => ACCENTS[k].accent === v);
-            if (name) setTweak("accent", name);
-          }} />
-        
-        <TweakSection label="Typography" />
-        <TweakSelect label="Scripture face" value={t.scriptureFont} options={Object.keys(SCRIPTURE_FONTS)} onChange={(v) => setTweak("scriptureFont", v)} />
-        <TweakSection label="Motion" />
-        <TweakToggle label="Animate the redemption" value={t.animate} onChange={(v) => setTweak("animate", v)} />
-      </TweaksPanel>
     </div>);
 
 }

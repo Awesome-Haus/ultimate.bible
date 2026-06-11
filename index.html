@@ -3,7 +3,21 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>ultimate.bible — The Redeemed Word</title>
+<title>Ultimate Bible — The Lasting Word</title>
+<link rel="icon" type="image/png" href="UltimatumFavicon.png" />
+<meta name="description" content="The foundational words of Western civilization, renewed — the word that wounds struck, and the word that frees set in its place, with the original kept to the last word." />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Ultimate Bible" />
+<meta property="og:title" content="Ultimate Bible — The Lasting Word" />
+<meta property="og:description" content="The foundational words of Western civilization, renewed — the word that wounds struck, and the word that frees set in its place, with the original kept to the last word." />
+<meta property="og:url" content="https://ultimate.bible/" />
+<meta property="og:image" content="https://ultimate.bible/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Ultimate Bible — The Lasting Word" />
+<meta name="twitter:description" content="The foundational words of Western civilization, renewed — the word that wounds struck, and the word that frees set in its place, with the original kept to the last word." />
+<meta name="twitter:image" content="https://ultimate.bible/og.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Prata&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -36,105 +50,77 @@
 
   /* ---------------- masthead ---------------- */
   .masthead {
-    flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between;
-    gap: 28px; padding: 20px clamp(20px, 5vw, 64px) 20px clamp(16px, 2vw, 28px); border-bottom: 1px solid var(--line);
+    position: relative; flex: 0 0 auto; display: flex; align-items: center; justify-content: center;
+    padding: 22px clamp(20px, 5vw, 64px); border-bottom: 1px solid var(--line);
   }
-  .brand { appearance: none; background: transparent; border: none; cursor: pointer; text-align: left; padding: 0; }
-  .wordmark { font-family: var(--scripture); font-weight: 400; letter-spacing: 0; font-size: clamp(24px, 3vw, 36px); line-height: 1; color: var(--ink); }
-  .wordmark .dot { color: var(--accent); }
-  .tagline { font-family: var(--mono); font-size: 10px; letter-spacing: 0.4em; color: var(--ink-soft); margin-top: 8px; padding-left: 2px; }
-  .nav { display: flex; gap: 4px; }
-  .nav-tab {
-    appearance: none; cursor: pointer; background: transparent; border: 1px solid transparent;
-    font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--ink-soft); padding: 9px 16px; border-radius: 2px; transition: color .2s, background .2s, border-color .2s;
+  .brand { appearance: none; background: transparent; border: none; cursor: pointer; text-align: center; padding: 0; }
+  .brand-mark { display: block; margin: 0 auto; width: 68px; height: 68px; object-fit: contain; }
+  /* single cycling theme button — a circle in the masthead's right corner */
+  .theme-cycle {
+    appearance: none; cursor: pointer; position: absolute; right: clamp(20px, 5vw, 64px);
+    top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%;
+    border: 1px solid var(--line); background: transparent; color: var(--ink-soft);
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: color .2s, border-color .2s, background .2s;
   }
-  .nav-tab:hover { color: var(--ink); }
-  .nav-tab.on { color: var(--ink); border-color: var(--line); background: color-mix(in oklab, var(--paper-2) 70%, transparent); }
-  .theme-toggle { display: inline-flex; align-items: stretch; gap: 0; margin-left: 14px; border: 1px solid var(--line); border-radius: 2px; overflow: hidden; }
-  .theme-seg { appearance: none; cursor: pointer; background: transparent; border: none; border-left: 1px solid var(--line); display: inline-flex; align-items: center; gap: 6px; padding: 8px 11px; color: var(--ink-soft); transition: color .2s, background .2s; }
-  .theme-seg:first-child { border-left: none; }
-  .theme-seg:hover { color: var(--ink); }
-  .theme-seg.on { background: color-mix(in oklab, var(--paper-2) 85%, transparent); color: var(--accent-deep); }
-  .ts-icon { font-size: 13px; line-height: 1; }
-  .ts-label { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
-  @media (max-width: 980px) { .theme-seg .ts-label { display: none; } .theme-seg { padding: 8px 10px; } }
+  .theme-cycle:hover { color: var(--ink); border-color: var(--accent); }
+  /* the chant button — the theme circle's mirror, holding the left corner.
+     Its edge IS the progress ring: hairline at rest, gold sweeping as it sings. */
+  .audio-cycle {
+    appearance: none; cursor: pointer; position: absolute; left: clamp(20px, 5vw, 64px);
+    top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%;
+    border: none; background: transparent; color: var(--ink-soft);
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: color .2s;
+  }
+  .audio-cycle::before {
+    content: ""; position: absolute; inset: 0; border-radius: 50%;
+    background: var(--line);
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 1.5px));
+    mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 1.5px));
+  }
+  .audio-cycle::after {
+    content: ""; position: absolute; inset: 0; border-radius: 50%;
+    background: conic-gradient(var(--accent-deep) calc(var(--p, 0) * 1turn), transparent 0);
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 1.5px));
+    mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 1.5px));
+    transition: opacity 1.4s ease;
+  }
+  .audio-cycle.ring-done::after { opacity: 0; }
+  .audio-cycle:hover { color: var(--ink); }
+  .audio-cycle:hover::before { background: var(--accent); }
+  .audio-cycle.playing { color: var(--accent-deep); }
+  .audio-cycle .ts-icon { font-size: 17px; }
+  .ts-icon { font-size: 25px; line-height: 1; }
+  /* per-glyph optical sizing + nudges: each glyph's ink sits differently in its em-box */
+  .ts-icon.ti-auto { transform: translate(1px, -1px); }
+  .ts-icon.ti-light { font-size: 28px; transform: translate(1px, -3px); }
+  .ts-icon.ti-dark { font-size: 22px; }
 
   /* ---------------- body grid (shared) ---------------- */
   .body { flex: 1 1 auto; min-height: 0; display: grid; grid-template-columns: 300px 1fr; }
 
-  /* ---------------- top-verses index ---------------- */
-  .index { border-right: 1px solid var(--line); padding: 28px clamp(16px, 2vw, 28px); display: flex; flex-direction: column; gap: 4px; overflow-y: auto; }
-  .index-head, .book-group-label, .bs-cap, .cbh-kicker { font-family: var(--mono); }
-  .index-head { font-size: 10.5px; letter-spacing: 0.34em; color: var(--ink-soft); margin-bottom: 14px; }
-  .index-list, .book-rows { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
-  .index-item {
-    width: 100%; text-align: left; cursor: pointer; appearance: none; background: transparent;
-    border: none; border-top: 1px solid var(--line); padding: 13px 8px 14px 14px; position: relative;
-    display: flex; flex-direction: column; gap: 5px; transition: background .18s;
-  }
-  .index-item::before { content: ""; position: absolute; left: 0; top: -1px; bottom: 0; width: 2px; background: var(--accent); transform: scaleY(0); transform-origin: top; transition: transform .22s ease; }
-  .index-item:hover { background: color-mix(in oklab, var(--paper-2) 60%, transparent); }
-  .index-item.on::before { transform: scaleY(1); }
-  .index-item.on { background: color-mix(in oklab, var(--paper-2) 80%, transparent); }
-  .index-list li:last-child .index-item { border-bottom: 1px solid var(--line); }
-  .ii-ref { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; color: var(--accent-deep); text-transform: uppercase; }
-  .ii-preview { font-family: var(--scripture); font-size: 17px; line-height: 1.34; color: var(--ink); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-  .index-foot { margin-top: auto; padding-top: 22px; font-size: 12px; line-height: 1.55; color: var(--ink-soft); font-style: italic; }
-  .index-foot .ff { color: var(--accent); font-style: normal; margin-right: 4px; }
+  .book-group-label, .bs-cap, .cbh-kicker { font-family: var(--mono); }
+  .book-rows { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
 
-  /* ---------------- stage (rectify) ---------------- */
-  .stage { overflow-y: auto; display: flex; padding: clamp(24px, 5vh, 56px) clamp(22px, 6vw, 84px); }
-  .stage-inner { margin: auto; width: 100%; max-width: 900px; }
-  .seek-bar { display: flex; align-items: center; gap: 12px; border-bottom: 1.5px solid var(--ink); padding-bottom: 10px; margin-bottom: clamp(30px, 6vh, 54px); }
-  .seek-glyph { color: var(--accent); font-size: 16px; }
-  .seek-input { flex: 1; min-width: 0; appearance: none; background: transparent; border: none; padding: 4px 0; font-family: var(--ui); font-size: 15px; color: var(--ink); }
-  .seek-input::placeholder { color: color-mix(in oklab, var(--ink-soft) 80%, transparent); }
-  .seek-input:focus { outline: none; }
-  .seek-btn { appearance: none; cursor: pointer; border: 1px solid var(--ink); background: var(--ink); color: var(--paper); font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; padding: 9px 18px; border-radius: 2px; transition: background .2s, opacity .2s; }
-  .seek-btn:hover:not(:disabled) { background: var(--accent-deep); border-color: var(--accent-deep); }
-  .seek-btn:disabled { opacity: 0.35; cursor: default; }
 
-  .folio { width: 100%; }
-  .folio-ref { display: flex; align-items: center; gap: 12px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.28em; color: var(--accent-deep); text-transform: uppercase; margin-bottom: 24px; }
   .ref-mark { width: 26px; height: 1px; background: var(--accent); display: inline-block; flex: 0 0 auto; }
 
-  .verse-wrap { min-height: 1.4em; }
-  .wordmark, .verse, .ii-preview, .br-name, .cbh-title, .bs-num, .re-chip, .rh-title {
+  .verse, .br-name, .cbh-title, .bs-num {
     font-variant-ligatures: common-ligatures discretionary-ligatures contextual;
     font-feature-settings: "liga" 1, "clig" 1, "dlig" 1, "calt" 1;
   }
-  .verse { font-family: var(--scripture); font-weight: 400; font-size: clamp(30px, 5vw, 56px); line-height: 1.3; letter-spacing: 0; margin: 0; color: var(--ink); text-wrap: pretty; }
+  .verse { font-family: var(--scripture); font-weight: 400; font-size: clamp(30px, 5vw, 56px); line-height: 1.3; letter-spacing: normal; margin: 0; color: var(--ink); text-wrap: pretty; white-space: pre-line; }
   .verse.compact { font-size: clamp(21px, 2.6vw, 30px); line-height: 1.42; }
 
-  /* redeemed words: the redemption speaks for itself — no strike, just a
-     gentle settle into the accent tone */
-  .rx { display: inline; color: inherit; transition: color .6s ease; }
-  .verse.is-rectified .rx { color: var(--accent-deep); }
+  /* set in stone: the renewed text stands carved and unmarked. The verse
+     sizes itself to its length — great passages sit as pages, not walls. */
+  .verse.size-m { font-size: clamp(26px, 4vw, 44px); }
+  .verse.size-l { font-size: clamp(22px, 3.2vw, 36px); line-height: 1.4; }
+  .verse.size-xl { font-size: clamp(17px, 2.3vw, 27px); line-height: 1.5; }
 
-  .skeleton { display: flex; flex-direction: column; gap: 0.42em; }
-  .sk-line { height: 0.72em; border-radius: 3px; background: linear-gradient(90deg, var(--paper-2) 0%, color-mix(in oklab, var(--paper-2) 55%, var(--line)) 40%, var(--paper-2) 80%); background-size: 200% 100%; animation: sh 1.3s ease-in-out infinite; }
-  @keyframes sh { 0% { background-position: 200% 0; } 100% { background-position: -120% 0; } }
 
-  .controls { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; margin-top: 36px; padding-top: 22px; border-top: 1px solid var(--line); }
-  .rectify-cta { appearance: none; cursor: pointer; border: 1px solid var(--ink); background: var(--ink); color: var(--paper); font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; padding: 13px 22px; border-radius: 2px; display: inline-flex; align-items: center; gap: 9px; transition: background .2s, transform .12s; }
-  .rectify-cta:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
-  .rectify-cta:active { transform: translateY(1px); }
-  .cta-glyph { color: var(--accent); font-size: 14px; }
-  .revert { appearance: none; cursor: pointer; background: transparent; border: none; font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); padding: 6px 0; transition: color .2s; }
-  .revert:hover { color: var(--accent-deep); }
-  .canonize { appearance: none; cursor: pointer; background: transparent; border: 1px solid var(--accent); color: var(--accent-deep); font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; padding: 12px 18px; border-radius: 2px; transition: background .2s, color .2s; }
-  .canonize:hover { background: var(--accent); color: var(--paper); }
-  .canon-link { appearance: none; cursor: pointer; background: transparent; border: none; font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; color: var(--accent-deep); padding: 6px 0; transition: color .2s; }
-  .canon-link:hover { color: var(--ink); }
-  .submitted { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; color: var(--accent-deep); display: inline-flex; align-items: center; }
-  .count { font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--struck); margin-left: auto; }
-  .err { margin-top: 22px; font-size: 13px; color: var(--accent-deep); border-left: 2px solid var(--accent); padding: 8px 0 8px 14px; background: var(--paper-2); }
 
-  .rationale { margin-top: 30px; max-width: 620px; opacity: 0; transform: translateY(10px); transition: opacity .6s ease .25s, transform .6s ease .25s; pointer-events: none; }
-  .rationale.show { opacity: 1; transform: none; pointer-events: auto; }
-  .rat-label { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.32em; color: var(--accent-deep); margin-bottom: 10px; }
-  .rat-body { margin: 0; font-size: 16.5px; line-height: 1.62; color: var(--ink-soft); font-style: italic; text-wrap: pretty; }
 
   /* ---------------- canon (page 2) ---------------- */
   .books { border-right: 1px solid var(--line); overflow-y: auto; padding: 24px 0 40px; }
@@ -180,19 +166,19 @@
   .sort-by select:hover { border-color: var(--accent); }
   .cf-tags { display: inline-flex; gap: 6px; margin-left: auto; }
   .chip { font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 7px; border-radius: 10px; border: 1px solid var(--line); color: var(--ink-soft); white-space: nowrap; }
-  .chip.voice { color: #fff; border-color: transparent; }
-  .chip.voice.reason { background: #36607a; }
-  .chip.voice.revelation { background: #a37f3f; }
-  .chip.voice.law { background: #8c3a34; }
-  .chip.voice.enlightenment { background: #5a6b3a; }
-  .chip.voice.imagination { background: #6a4a78; }
-  .chip.voice.unsorted { background: var(--struck); }
+  .chip.testament { color: #fff; border-color: transparent; }
+  .chip.testament.reason { background: #36607a; }
+  .chip.testament.revelation { background: #a37f3f; }
+  .chip.testament.law { background: #8c3a34; }
+  .chip.testament.enlightenment { background: #5a6b3a; }
+  .chip.testament.imagination { background: #6a4a78; }
+  .chip.testament.unsorted { background: var(--struck); }
 
   /* ---------------- responsive ---------------- */
   @media (max-width: 880px) {
     .body { display: block; overflow-y: auto; grid-template-columns: 1fr; }
-    .index, .stage, .books, .canon-main { overflow: visible; height: auto; }
-    .index, .books { border-right: none; border-bottom: 1px solid var(--line); }
+    .books, .canon-main { overflow: visible; height: auto; }
+    .books { border-right: none; border-bottom: 1px solid var(--line); }
     .index-foot { display: none; }
     .stage { display: block; padding: 32px 22px 64px; }
     .stage-inner { margin: 0; }
@@ -207,10 +193,8 @@
   <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
   <script src="canon-parser.js"></script>
-  <script type="text/babel" src="tweaks-panel.jsx"></script>
   <script type="text/babel" src="data.jsx"></script>
   <script type="text/babel" src="components.jsx"></script>
-  <script type="text/babel" src="top-view.jsx"></script>
   <script type="text/babel" src="canon-view.jsx"></script>
   <script type="text/babel" src="app.jsx"></script>
 </body>
