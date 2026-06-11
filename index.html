@@ -90,12 +90,7 @@
   .audio-cycle:hover { color: var(--ink); }
   .audio-cycle:hover::before { background: var(--accent); }
   .audio-cycle.playing { color: var(--accent-deep); }
-  .audio-cycle .ts-icon { font-size: 17px; }
-  .ts-icon { font-size: 25px; line-height: 1; }
-  /* per-glyph optical sizing + nudges: each glyph's ink sits differently in its em-box */
-  .ts-icon.ti-auto { transform: translate(1px, -1px); }
-  .ts-icon.ti-light { font-size: 28px; transform: translate(1px, -3px); }
-  .ts-icon.ti-dark { font-size: 22px; }
+  .ic { display: block; }
 
   /* ---------------- body grid (shared) ---------------- */
   .body { flex: 1 1 auto; min-height: 0; display: grid; grid-template-columns: 300px 1fr; }

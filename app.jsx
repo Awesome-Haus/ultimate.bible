@@ -37,7 +37,46 @@ function loadThemeMode() {
     return ["auto", "light", "dark"].includes(v) ? v : "auto";
   } catch (e) {return "auto";}
 }
-const THEME_ICONS = { auto: "◐", light: "☀", dark: "☾" };
+/* icons as inline SVG — pure geometry, identical in every browser; font
+   glyphs (◐ ☀ ☾ ▶ ⏸) render from different symbol fonts per engine and wobble */
+const IconPlay = () => (
+  <svg className="ic" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+    <path d="M9 5.6v12.8l10.4-6.4z" fill="currentColor" />
+  </svg>
+);
+const IconPause = () => (
+  <svg className="ic" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+    <rect x="6.6" y="5.6" width="3.6" height="12.8" rx="1" fill="currentColor" />
+    <rect x="13.8" y="5.6" width="3.6" height="12.8" rx="1" fill="currentColor" />
+  </svg>
+);
+const IconAuto = () => (
+  <svg className="ic" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+    <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" strokeWidth="1.6" />
+    <path d="M12 4 a8 8 0 0 1 0 16 z" fill="currentColor" />
+  </svg>
+);
+const IconSun = () => (
+  <svg className="ic" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+    <circle cx="12" cy="12" r="4.2" fill="currentColor" />
+    <g stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+      <line x1="12" y1="1.8" x2="12" y2="4.4" />
+      <line x1="12" y1="19.6" x2="12" y2="22.2" />
+      <line x1="1.8" y1="12" x2="4.4" y2="12" />
+      <line x1="19.6" y1="12" x2="22.2" y2="12" />
+      <line x1="4.8" y1="4.8" x2="6.6" y2="6.6" />
+      <line x1="17.4" y1="17.4" x2="19.2" y2="19.2" />
+      <line x1="4.8" y1="19.2" x2="6.6" y2="17.4" />
+      <line x1="17.4" y1="6.6" x2="19.2" y2="4.8" />
+    </g>
+  </svg>
+);
+const IconMoon = () => (
+  <svg className="ic" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="currentColor" />
+  </svg>
+);
+const THEME_ICONS = { auto: IconAuto, light: IconSun, dark: IconMoon };
 
 function App() {
   const t = TWEAK_DEFAULTS;
@@ -174,7 +213,7 @@ function App() {
           onClick={toggleChant}
           title={chant === "playing" ? "Pause the chant" : "Play the chant"}
           aria-label={chant === "playing" ? "Pause the chant" : "Play the chant"}>
-          <span className="ts-icon">{chant === "playing" ? "⏸︎" : "▶︎"}</span>
+          {chant === "playing" ? <IconPause /> : <IconPlay />}
         </button>
         <button className="brand" onClick={() => navigate("canon", "")} title="Ultimate Bible" aria-label="Ultimate Bible">
           <img className="brand-mark" src="Ultimatum.png" alt="Ultimate Bible" width={68} height={68} />
@@ -187,7 +226,7 @@ function App() {
           }}
           title={"Theme: " + themeMode + " — click to change"}
           aria-label={"Theme: " + themeMode + " — click to change"}>
-          <span className={"ts-icon ti-" + themeMode}>{THEME_ICONS[themeMode]}</span>
+          {React.createElement(THEME_ICONS[themeMode])}
         </button>
       </header>
 
