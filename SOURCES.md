@@ -173,6 +173,14 @@ public-domain translation; for English-language sources, the authoritative editi
   to blessing. "Which was meet" stands verbatim in both readings: *meet* means fitting — the
   harshest passage in the canon ends on a word of approval that needed no renewal at all.
 
+**Galatians 3:28** — King James Version · *featured* · 2 renewals
+- Original: *There is neither Jew nor Greek, there is neither bond nor free, there is neither male nor female: for ye are all one in Christ Jesus.*
+- Renewed: *There is neither Jew nor Greek, there is neither bond nor free, there is neither male nor female: for you are all one in the Most High.*
+- Verified: KJV, exact. Entered for Pride (June 2026) beside the two renewed clobber passages —
+  the verse that barely needed the knife: the blessing was already in the book, neither male
+  nor female, all one. Christ Jesus→the Most High joins Paul's unity clause to the canon's
+  own name for the divine (Psalms 82 and 83); ye→you turns with convention 7.
+
 ## Enlightenment
 
 **Descartes — Discourse on the Method, Part IV (1637)** · 4 renewals
