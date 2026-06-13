@@ -137,6 +137,14 @@ public-domain translation; for English-language sources, the authoritative editi
 - Verified: KJV, exact. The renewal's ending is the verse's own first half — the doom
   half finally agrees with the blessing half (Hebrew parallelism restored).
 
+**Leviticus 18:22** — King James Version · *featured* · 4 renewals
+- Original: *Thou shalt not lie with mankind, as with womankind: it is abomination.*
+- Renewed: *You shall be with whom you love, with their consent: it is marvelous.*
+- Verified: KJV, exact. Renewed for Pride (June 2026), paired with Romans 1:26-27 — the two
+  lines most weaponized against queer love, both turned. The prohibition becomes a blessing,
+  and the renewal writes in the one commandment the original never thought to give: consent.
+  Abomination→marvelous: a thing set apart in horror becomes a thing set apart in wonder.
+
 **Hobbes — De Cive, Epistle Dedicatory (1642; 1651 English)** · 6 renewals
 - Original: *To speak impartially, both sayings are very true; That Man to Man is a kind of God; and that Man to Man is an arrant Wolfe.*
 - Renewed: *To speak steadfastly, both sayings are very true; That Human to Human is a kind of God; and that Human to Human is a tender Shepherd.*
@@ -156,6 +164,14 @@ public-domain translation; for English-language sources, the authoritative editi
 - Renewed: *In times of war, the law stands firm.*
 - Verified: standard translation of *Silent enim leges inter arma*. Plural statutes fall
   silent; the law, singular — the moral one — stands.
+
+**Romans 1:26-27** — King James Version · *featured* · 22 renewals
+- Original: *For this cause God gave them up unto vile affections: for even their women did change the natural use into that which is against nature: And likewise also the men, leaving the natural use of the woman, burned in their lust one toward another; men with men working that which is unseemly, and receiving in themselves that recompence of their error which was meet.*
+- Renewed: *For this cause God blessed them with holy affections: for every person did find the consensual way in that which is of their nature: And likewise also every person, joining this use of their hearts, tended their love one toward another; people with people being that which is well, and giving to themselves that endowment of their choice which was meet.*
+- Verified: KJV, exact (original spelling "recompence"). Renewed for Pride (June 2026), paired
+  with Leviticus 18:22. God is kept (as Nietzsche keeps him) — it is the giving-up that turns
+  to blessing. "Which was meet" stands verbatim in both readings: *meet* means fitting — the
+  harshest passage in the canon ends on a word of approval that needed no renewal at all.
 
 ## Enlightenment
 
