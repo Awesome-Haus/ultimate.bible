@@ -165,9 +165,9 @@ public-domain translation; for English-language sources, the authoritative editi
 - Verified: standard translation of *Silent enim leges inter arma*. Plural statutes fall
   silent; the law, singular — the moral one — stands.
 
-**Romans 1:26-27** — King James Version · *featured* · 22 renewals
+**Romans 1:26-27** — King James Version · *featured* · 21 renewals
 - Original: *For this cause God gave them up unto vile affections: for even their women did change the natural use into that which is against nature: And likewise also the men, leaving the natural use of the woman, burned in their lust one toward another; men with men working that which is unseemly, and receiving in themselves that recompence of their error which was meet.*
-- Renewed: *For this cause God blessed them with holy affections: for every person did find the consensual way in that which is of their nature: And likewise also every person, joining this use of their hearts, tended their love one toward another; people with people being that which is well, and giving to themselves that endowment of their choice which was meet.*
+- Renewed: *For this cause God blessed them with holy affections: for every person did find the consensual way into that which is of their nature: And likewise also every person, joining this use of their hearts, tended their love one toward another; people with people being that which is well, and giving to themselves that endowment of their choice which was meet.*
 - Verified: KJV, exact (original spelling "recompence"). Renewed for Pride (June 2026), paired
   with Leviticus 18:22. God is kept (as Nietzsche keeps him) — it is the giving-up that turns
   to blessing. "Which was meet" stands verbatim in both readings: *meet* means fitting — the
