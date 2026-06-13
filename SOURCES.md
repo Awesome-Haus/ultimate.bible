@@ -45,13 +45,13 @@ public-domain translation; for English-language sources, the authoritative editi
 - Renewed: *Pride goes before creation, and a dignified spirit before ascension.*
 - Verified: KJV, exact.
 
-**Heraclitus — Fragment 119 (Diels–Kranz B119)** · 2 renewals
+**Heraclitus — Fragment 119 (Diels–Kranz B119)** · 3 renewals
 - Original: *Character is fate.*
-- Renewed: *Personality is divinity.*
+- Renewed: *You are Divine.*
 - Verified: standard English of *ēthos anthrōpōi daimōn*. *daimōn* renders as fate **or**
-  divinity/indwelling god — the renewal restores the divine sense. *Personality* over
-  *character* by the editor's distinction: anyone can be a character — a part to play;
-  personality is the indwelling, unfakeable self. The daimōn.
+  divinity/indwelling god — *fate→Divine* restores the divine sense. The renewal then
+  re-persons the maxim: a third-person law of character becomes a second-person blessing
+  spoken straight to the reader. The indwelling god named plainly — you.
 
 **Marcus Aurelius — Meditations VII.21** — George Long translation (1862) · 5 renewals
 - Original: *Near is thy forgetfulness of all things; and near the forgetfulness of thee by all.*
