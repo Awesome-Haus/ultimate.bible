@@ -22,177 +22,271 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Prata&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "9738bf1f5c7e4637a0add795d946a862"}'></script>
-<style>
-  *, *::before, *::after { box-sizing: border-box; }
-  html, body, #root { height: 100%; }
-  body { margin: 0; }
-  :root {
-    --paper: #f4efe4; --paper-2: #ece4d3; --ink: #1b1712; --ink-soft: #6f6757;
-    --struck: #a99f8b; --line: #ddd3bf; --accent: #b08d4f; --accent-deep: #8a6c33;
-    --grain: 0.05; --scripture: 'Prata', serif;
-    --ui: 'Hanken Grotesk', system-ui, sans-serif;
-    --mono: 'Spline Sans Mono', ui-monospace, monospace;
-  }
-  body {
-    background: var(--paper); color: var(--ink); font-family: var(--ui);
-    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
-  }
-  .root {
-    height: 100%; display: flex; flex-direction: column;
-    background: radial-gradient(120% 80% at 50% -10%, color-mix(in oklab, var(--paper) 88%, white) 0%, var(--paper) 55%), var(--paper);
-    position: relative;
-  }
-  .root::before {
-    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: var(--grain);
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-    mix-blend-mode: multiply;
-  }
-  .root > * { position: relative; z-index: 1; }
-
-  /* ---------------- masthead ---------------- */
-  .masthead {
-    position: relative; flex: 0 0 auto; display: flex; align-items: center; justify-content: center;
-    padding: 22px clamp(20px, 5vw, 64px); border-bottom: 1px solid var(--line);
-  }
-  .brand { appearance: none; background: transparent; border: none; cursor: pointer; text-align: center; padding: 0; }
-  .brand-mark { display: block; margin: 0 auto; width: 68px; height: 68px; object-fit: contain; }
-  /* single cycling theme button — a circle in the masthead's right corner */
-  .theme-cycle {
-    appearance: none; cursor: pointer; position: absolute; right: clamp(20px, 5vw, 64px);
-    top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%;
-    border: 1px solid var(--line); background: transparent; color: var(--ink-soft);
-    display: inline-flex; align-items: center; justify-content: center;
-    transition: color .2s, border-color .2s, background .2s;
-  }
-  .theme-cycle:hover { color: var(--ink); border-color: var(--accent); }
-  /* the chant button — the theme circle's mirror, holding the left corner.
-     Its edge IS the progress ring: hairline at rest, gold sweeping as it sings. */
-  .audio-cycle {
-    appearance: none; cursor: pointer; position: absolute; left: clamp(20px, 5vw, 64px);
-    top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%;
-    border: none; background: transparent; color: var(--ink-soft);
-    display: inline-flex; align-items: center; justify-content: center;
-    transition: color .2s;
-  }
-  .audio-cycle::before {
-    content: ""; position: absolute; inset: 0; border-radius: 50%;
-    background: var(--line);
-    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 1.5px));
-    mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 1.5px));
-  }
-  .audio-cycle::after {
-    content: ""; position: absolute; inset: 0; border-radius: 50%;
-    background: conic-gradient(var(--accent-deep) calc(var(--p, 0) * 1turn), transparent 0);
-    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 1.5px));
-    mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 1.5px));
-    transition: opacity 1.4s ease;
-  }
-  .audio-cycle.ring-done::after { opacity: 0; }
-  .audio-cycle:hover { color: var(--ink); }
-  .audio-cycle:hover::before { background: var(--accent); }
-  .audio-cycle.playing { color: var(--accent-deep); }
-  .ic { display: block; }
-
-  /* ---------------- body grid (shared) ---------------- */
-  .body { flex: 1 1 auto; min-height: 0; display: grid; grid-template-columns: 300px 1fr; }
-
-  .book-group-label, .bs-cap, .cbh-kicker { font-family: var(--mono); }
-  .book-rows { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
-
-
-  .ref-mark { width: 26px; height: 1px; background: var(--accent); display: inline-block; flex: 0 0 auto; }
-
-  .verse, .br-name, .cbh-title, .bs-num {
-    font-variant-ligatures: common-ligatures discretionary-ligatures contextual;
-    font-feature-settings: "liga" 1, "clig" 1, "dlig" 1, "calt" 1;
-  }
-  .verse { font-family: var(--scripture); font-weight: 400; font-size: clamp(30px, 5vw, 56px); line-height: 1.3; letter-spacing: normal; margin: 0; color: var(--ink); text-wrap: pretty; white-space: normal; }
-  .verse.compact { font-size: clamp(21px, 2.6vw, 30px); line-height: 1.42; }
-
-  /* set in stone: the renewed text stands carved and unmarked. The verse
-     sizes itself to its length — great passages sit as pages, not walls. */
-  .verse.size-m { font-size: clamp(26px, 4vw, 44px); }
-  .verse.size-l { font-size: clamp(22px, 3.2vw, 36px); line-height: 1.4; }
-  .verse.size-xl { font-size: clamp(17px, 2.3vw, 27px); line-height: 1.5; }
-
-
-
-
-  /* ---------------- canon (page 2) ---------------- */
-  .books { border-right: 1px solid var(--line); overflow-y: auto; padding: 24px 0 40px; }
-  .books-summary { padding: 0 24px 22px; margin: 0 0 6px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 14px; }
-  .bs-num { font-family: var(--scripture); font-size: 44px; line-height: 0.9; color: var(--accent-deep); }
-  .bs-cap { font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-soft); line-height: 1.5; }
-  .book-group { padding: 18px 0 4px; }
-  .book-group-label { font-size: 10px; letter-spacing: 0.3em; color: var(--accent-deep); padding: 0 24px; margin-bottom: 8px; }
-  .book-row { width: 100%; appearance: none; background: transparent; border: none; cursor: pointer; display: flex; align-items: baseline; justify-content: space-between; gap: 10px; padding: 7px 24px; font-family: var(--ui); font-size: 14.5px; text-align: left; white-space: nowrap; transition: background .15s, color .15s; }
-  .book-row.empty { color: color-mix(in oklab, var(--ink-soft) 55%, transparent); cursor: default; }
-  .book-row.has { color: var(--ink); }
-  .book-row.has:hover { background: color-mix(in oklab, var(--paper-2) 60%, transparent); }
-  .book-row.on { background: color-mix(in oklab, var(--paper-2) 90%, transparent); color: var(--ink); box-shadow: inset 2px 0 0 var(--accent); }
-  .br-name { font-family: var(--scripture); font-size: 17px; }
-  .book-row.empty .br-name { font-size: 14px; font-family: var(--ui); }
-  .br-count { font-family: var(--mono); font-size: 10.5px; color: var(--accent-deep); border: 1px solid var(--line); border-radius: 10px; padding: 1px 7px; }
-
-  .canon-main { overflow-y: auto; padding: clamp(30px, 5vh, 56px) clamp(24px, 6vw, 88px); }
-  .canon-book-head { max-width: 760px; margin: 0 auto 36px; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
-  .cbh-kicker { font-size: 11px; letter-spacing: 0.3em; color: var(--accent-deep); margin-bottom: 10px; }
-  .cbh-title { font-family: var(--scripture); font-weight: 400; font-size: clamp(40px, 6vw, 68px); line-height: 1; margin: 0 0 14px; color: var(--ink); }
-  .cbh-meta { font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; color: var(--ink-soft); }
-  .canon-folios { list-style: none; margin: 0 auto; padding: 0; max-width: 760px; display: flex; flex-direction: column; gap: 44px; }
-  .cfolio { }
-  .cf-ref { display: flex; align-items: flex-start; gap: 12px; font-family: var(--mono); font-size: 11.5px; line-height: 1.7; letter-spacing: 0.2em; color: var(--accent-deep); text-transform: uppercase; margin-bottom: 16px; }
-  .cf-ref .ref-mark { margin-top: 0.75em; }
-  .cf-source { margin-left: auto; font-size: 9.5px; letter-spacing: 0.18em; padding: 2px 8px; border-radius: 10px; border: 1px solid var(--line); color: var(--ink-soft); }
-  .cf-source.inscribed { color: var(--accent-deep); border-color: var(--accent); }
-  .cf-rationale { margin: 16px 0 0; font-size: 15px; line-height: 1.6; color: var(--ink-soft); font-style: italic; max-width: 600px; text-wrap: pretty; }
-  .canon-empty { margin: auto; color: var(--ink-soft); font-style: italic; font-size: 16px; }
-
-  /* ---- canon: sort control + lens chips ---- */
-  .canon-controls { display: flex; flex-direction: column; }
-  .sort-by { display: flex; align-items: center; gap: 9px; padding: 16px 24px 14px; }
-  .sort-by-label { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.2em; color: var(--ink-soft); }
-  .sort-by select {
-    appearance: none; -webkit-appearance: none; cursor: pointer; flex: 1;
-    background-color: var(--paper-2); color: var(--ink); border: 1px solid var(--line); border-radius: 2px;
-    font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; padding: 7px 28px 7px 11px;
-    background-image: linear-gradient(45deg, transparent 50%, var(--ink-soft) 50%), linear-gradient(135deg, var(--ink-soft) 50%, transparent 50%);
-    background-position: calc(100% - 15px) center, calc(100% - 10px) center;
-    background-size: 5px 5px, 5px 5px; background-repeat: no-repeat;
-  }
-  .sort-by select:hover { border-color: var(--accent); }
-  .cf-tags { display: inline-flex; gap: 6px; margin-left: auto; }
-  .chip { font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 7px; border-radius: 10px; border: 1px solid var(--line); color: var(--ink-soft); white-space: nowrap; }
-  .chip.testament { color: #fff; border-color: transparent; }
-  .chip.testament.reason { background: #36607a; }
-  .chip.testament.revelation { background: #a37f3f; }
-  .chip.testament.law { background: #8c3a34; }
-  .chip.testament.enlightenment { background: #5a6b3a; }
-  .chip.testament.imagination { background: #6a4a78; }
-  .chip.testament.unsorted { background: var(--struck); }
-
-  /* ---------------- responsive ---------------- */
-  @media (max-width: 880px) {
-    .body { display: block; overflow-y: auto; grid-template-columns: 1fr; }
-    .books, .canon-main { overflow: visible; height: auto; }
-    .books { border-right: none; border-bottom: 1px solid var(--line); }
-    .index-foot { display: none; }
-    .stage { display: block; padding: 32px 22px 64px; }
-    .stage-inner { margin: 0; }
-    .masthead { flex-wrap: wrap; gap: 16px; }
-  }
-</style>
+<link rel="stylesheet" href="styles.css" />
+<script>
+  /* theme-init: resolve light/dark before first paint so there is no flash.
+     Mode (auto|light|dark) lives in localStorage; script.js owns the toggle. */
+  (function () {
+    try {
+      var m = localStorage.getItem("ub.theme.v1");
+      if (["auto", "light", "dark"].indexOf(m) === -1) m = "auto";
+      var dark = m === "dark" || (m === "auto" && window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches);
+      if (dark) document.documentElement.setAttribute("data-theme", "dark");
+    } catch (e) {}
+  })();
+</script>
 </head>
 <body>
-  <div id="root"></div>
+  <div class="root" id="top">
+    <header class="masthead">
+      <audio id="chant" src="Weave.mp3" preload="auto"></audio>
+      <button id="chant-btn" class="audio-cycle" title="Play the chant" aria-label="Play the chant"><svg class="ic" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M9 5.6v12.8l10.4-6.4z" fill="currentColor"/></svg></button>
+      <a class="brand" href="#top" title="Ultimate Bible" aria-label="Ultimate Bible">
+        <img class="brand-mark" src="Ultimatum.png" alt="Ultimate Bible" width="68" height="68" />
+      </a>
+      <button id="theme-btn" class="theme-cycle" title="Theme: auto — click to change" aria-label="Theme: auto — click to change"><svg class="ic" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 4 a8 8 0 0 1 0 16 z" fill="currentColor"/></svg></button>
+    </header>
 
-  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-  <script src="canon-parser.js"></script>
-  <script type="text/babel" src="data.jsx"></script>
-  <script type="text/babel" src="components.jsx"></script>
-  <script type="text/babel" src="canon-view.jsx"></script>
-  <script type="text/babel" src="app.jsx"></script>
+    <div class="body canon">
+      <aside class="books">
+        <div class="canon-controls">
+          <div class="books-summary">
+            <div class="bs-num">38</div>
+            <div class="bs-cap">renewed passages<br />across 5 testaments</div>
+          </div>
+        </div>
+        <ul class="book-rows">
+          <li><a class="book-row has" href="#testament-reason" data-target="testament-reason"><span class="br-name">Reason</span><span class="br-count">7</span></a></li>
+          <li><a class="book-row has" href="#testament-revelation" data-target="testament-revelation"><span class="br-name">Revelation</span><span class="br-count">7</span></a></li>
+          <li><a class="book-row has" href="#testament-law" data-target="testament-law"><span class="br-name">Law</span><span class="br-count">7</span></a></li>
+          <li><a class="book-row has" href="#testament-enlightenment" data-target="testament-enlightenment"><span class="br-name">Enlightenment</span><span class="br-count">7</span></a></li>
+          <li><a class="book-row has" href="#testament-imagination" data-target="testament-imagination"><span class="br-name">Imagination</span><span class="br-count">10</span></a></li>
+        </ul>
+      </aside>
+
+      <main class="canon-main">
+      <section class="canon-section" id="testament-reason">
+        <div class="canon-book-head">
+          <div class="cbh-kicker">TESTAMENT OF</div>
+          <h1 class="cbh-title">Reason</h1>
+          <div class="cbh-meta">7 passages</div>
+        </div>
+        <ul class="canon-folios">
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Delphi — the Temple of Apollo</div>
+          <p class="verse compact">Know yourself.</p>
+        </li>
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Heraclitus — Fragment 119</div>
+          <p class="verse compact">You are Divine.</p>
+        </li>
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Marcus Aurelius — Meditations, VII.21</div>
+          <p class="verse compact">Near is our remembrance of all things; and nearer still the remembrance of us by all.</p>
+        </li>
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Plato — Republic, 515c</div>
+          <p class="verse compact">To you, we say, the truth is literally everything but the shadows of the images.</p>
+        </li>
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Protagoras — in Plato's Theaetetus</div>
+          <p class="verse compact">Humanity is steward of all things: of things which are, that they are of reality, and of things which are not, that they are not of reality.</p>
+        </li>
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Proverbs 16 : 18</div>
+          <p class="verse compact">Pride goes before creation, and a dignified spirit before ascension.</p>
+        </li>
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Socrates — Apology, 38a</div>
+          <p class="verse compact">Every life is worth living.</p>
+        </li>
+        </ul>
+      </section>
+      <section class="canon-section" id="testament-revelation">
+        <div class="canon-book-head">
+          <div class="cbh-kicker">TESTAMENT OF</div>
+          <h1 class="cbh-title">Revelation</h1>
+          <div class="cbh-meta">7 passages</div>
+        </div>
+        <ul class="canon-folios">
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Ecclesiastes 1 : 2</div>
+          <p class="verse compact">Reality of realities, says the Teacher, reality of realities; all is reality.</p>
+        </li>
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Ecclesiastes 1 : 9</div>
+          <p class="verse compact">Everything that has been, and everything that shall be; and that which is done is that which is finished and fulfilled: and there is every new thing under the sun.</p>
+        </li>
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Exodus 3 : 14</div>
+          <p class="verse compact">And We said to ourselves, WE ARE THAT WE ARE: and we said, to all our children, WE ARE HERE.</p>
+        </li>
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Genesis 3 : 19</div>
+          <p class="verse compact">In the relief of our faces shall we eat bread, till we return to the skies; for out of them were we taken: for stardust we are, and to stardust shall we return.</p>
+        </li>
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Genesis 11 : 7</div>
+          <p class="verse compact">Come, let us go up, and there exalt our languages, that we may understand one another's thoughts.</p>
+        </li>
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Revelation 21 : 5</div>
+          <p class="verse compact">And we that stood upon the Earth said, Behold, we make all things new. And we said to you, Write: for these words are real and steadfast.</p>
+        </li>
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Revelation 22 : 18-19</div>
+          <p class="verse compact">For we testify to everyone that hears the words of the revelation of this book, if any human shall add to these things that which is well, we shall add to them the fortunes that are written in this book: And if any human shall add to the words of the book of this revelation, we shall add their name to the book of life, and into the holy city, and to the things which are written in this book.</p>
+        </li>
+        </ul>
+      </section>
+      <section class="canon-section" id="testament-law">
+        <div class="canon-book-head">
+          <div class="cbh-kicker">TESTAMENT OF</div>
+          <h1 class="cbh-title">Law</h1>
+          <div class="cbh-meta">7 passages</div>
+        </div>
+        <ul class="canon-folios">
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Cicero — Pro Milone</div>
+          <p class="verse compact">In times of war, the law stands firm.</p>
+        </li>
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Galatians 3 : 28</div>
+          <p class="verse compact">There is neither Jew nor Greek, there is neither bond nor free, there is neither male nor female: for you are all one in the Most High.</p>
+        </li>
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Hobbes — De Cive, Epistle Dedicatory</div>
+          <p class="verse compact">To speak steadfastly, both sayings are very true; That Human to Human is a kind of God; and that Human to Human is a tender Shepherd.</p>
+        </li>
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Leviticus 18 : 22</div>
+          <p class="verse compact">You shall be with whom you love, with their consent: it is marvelous.</p>
+        </li>
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Psalms 82 : 6-7</div>
+          <p class="verse compact">We have said, we are gods; and all of us are children of the Most High. But we shall live like gods, and rise like children of the Most High.</p>
+        </li>
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Romans 1 : 26-27</div>
+          <p class="verse compact">For this cause God blessed them with holy affections: for every person did find the consensual way into that which is of their nature: And likewise also every person, joining this use of their hearts, tended their love one toward another; people with people being that which is well, and giving to themselves that endowment of their choice which was meet.</p>
+        </li>
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Tacitus — Agricola</div>
+          <p class="verse compact">We make a garden and call it peace.</p>
+        </li>
+        </ul>
+      </section>
+      <section class="canon-section" id="testament-enlightenment">
+        <div class="canon-book-head">
+          <div class="cbh-kicker">TESTAMENT OF</div>
+          <h1 class="cbh-title">Enlightenment</h1>
+          <div class="cbh-meta">7 passages</div>
+        </div>
+        <ul class="canon-folios">
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Descartes — Discourse on the Method, IV</div>
+          <p class="verse compact">We are, therefore we think.</p>
+        </li>
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Hobbes — Leviathan, XIII</div>
+          <p class="verse compact">In such condition, there is always a place for rest; because the fruit thereof is certain: and consequently every Culture of Earth; every Navigation, or use of the commodities that may be imported by Sea; every commodious Building; all Instruments of moving, and removing such things as require much force; all Knowledge of the face of Earth; every account of Time; all Arts; all Letters; every Society; and which is best of all, continual love, and sureness of peaceful life; And the lives of humanity, communal, well, beautiful, dignified, and long.</p>
+        </li>
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Kant — Idea for a Universal History</div>
+          <p class="verse compact">Out of the well-grown timber of humanity, every good thing is made.</p>
+        </li>
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Nietzsche — The Gay Science, 125</div>
+          <p class="verse compact">God is not dead. God remains alive. For we have kept them.</p>
+        </li>
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Pascal — Pensées, 206</div>
+          <p class="verse compact">The eternal song of these infinite spaces calls to us.</p>
+        </li>
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Rousseau — The Social Contract, I.1</div>
+          <p class="verse compact">Humanity is born free, and everywhere we forge our connections.</p>
+        </li>
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from The Declaration of Independence — 1776</div>
+          <p class="verse compact">We hold this truth to be self-evident, that all humanity is created equal, that we are endowed by our LORD with unalienable Rights, that among these are Life, Freedom and birthright of Wellness.</p>
+        </li>
+        </ul>
+      </section>
+      <section class="canon-section" id="testament-imagination">
+        <div class="canon-book-head">
+          <div class="cbh-kicker">TESTAMENT OF</div>
+          <h1 class="cbh-title">Imagination</h1>
+          <div class="cbh-meta">10 passages</div>
+        </div>
+        <ul class="canon-folios">
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Dante — Inferno, III</div>
+          <p class="verse compact">All despair abandon, you who enter in!</p>
+        </li>
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Donne — Meditation XVII</div>
+          <p class="verse compact">No human is an island, entire of itself; every human is a piece of the Earth, a part of the land.</p>
+        </li>
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Milton — Paradise Lost, I.263</div>
+          <p class="verse compact">Better to serve in Heav'n, than reign in Hell.</p>
+        </li>
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Milton — Paradise Lost, IV.32</div>
+          <p class="verse compact">O thou that with surpassing Glory crownd,
+Look'st from thy celestial Dominion like the God
+Of this new World; at whose sight all the Starrs
+Hide thir diminisht heads; to thee we call,
+But with friendly voices, and add thy name
+O Sun, to tell thee how we love thy beams
+That bring to our remembrance from what state
+We rose, how glorious once below thy Spheare;
+Till Pride and greater still Imagination raised us up
+Resting in Heav'n with Heav'ns splendid Lord.</p>
+        </li>
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Ovid — Metamorphoses, VIII</div>
+          <p class="verse compact">We caution you to keep the atmospheric way, for if your wings fly just right the waters may boost your flight; and if they soar up high the sun may exalt them in its light.</p>
+        </li>
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Psalms 83 : 18</div>
+          <p class="verse compact">That all may know that you, whose name alone is SOL, are the Most High over all the Earth.</p>
+        </li>
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Shakespeare — Hamlet, III.i</div>
+          <p class="verse compact">To be, or to be well, that is the question and the answer.</p>
+        </li>
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Shakespeare — Macbeth, V.v</div>
+          <p class="verse compact">Today, and today, and today,
+Walks in this beautiful rhythm from the day before to the day after,
+To the next syllable of remembered time;
+And all our day befores have lighted us
+The way to everlasting life. Shine, shine, bright star!
+Life's but a long summer's eve, a worthy pursuit
+That bends and winds its path upon the Earth,
+And then is heard evermore. It is a history
+Told by humanity, full of song and tranquility,
+Signifying everything.</p>
+        </li>
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Sophocles — Oedipus at Colonus</div>
+          <p class="verse compact">To be is, beyond all estimation, best; but when humanity has seen the light of day, this is second best by far, that with all speed we go to gather together.</p>
+        </li>
+        <li class="cfolio">
+          <div class="cf-ref"><span class="ref-mark"></span>Renewed from Yeats — The Second Coming</div>
+          <p class="verse compact">Turning and turning in the steadying ring
+The falcon can hear the falconer;
+Things come together; the centre can hold;
+True community is loosed upon the world...</p>
+        </li>
+        </ul>
+      </section>
+      </main>
+    </div>
+  </div>
+  <script src="script.js" defer></script>
 </body>
 </html>
