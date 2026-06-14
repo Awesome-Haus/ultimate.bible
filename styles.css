@@ -184,3 +184,28 @@ a.book-row:visited { color: inherit; }
 /* the sidebar link matching the current :target lights like the old .on row;
    falls back gracefully where :has is unsupported (just no active highlight) */
 .book-row.on { background: color-mix(in oklab, var(--paper-2) 90%, transparent); color: var(--ink); box-shadow: inset 2px 0 0 var(--accent); }
+
+/* ---- the original, on reveal ---- */
+/* The renewed line is the summary (always carved, always visible). Tapping it
+   unfolds the original beneath — muted whole, only the renewed words struck.
+   Native <details>: instant (set in stone, no animation), keyboard-accessible. */
+.folio-reveal > summary { display: block; cursor: pointer; list-style: none; }
+.folio-reveal > summary::-webkit-details-marker { display: none; }
+.folio-reveal > summary::marker { content: ""; }
+.folio-reveal > summary:focus-visible { outline: 1px solid var(--accent); outline-offset: 6px; }
+
+/* the quiet affordance that says a verse can be opened (reuses the cf-source pill look) */
+.cf-compare {
+  margin-left: auto; font-family: var(--mono); font-size: 9px; letter-spacing: 0.18em;
+  text-transform: uppercase; padding: 2px 8px; border-radius: 10px; border: 1px solid var(--line);
+  color: var(--ink-soft); white-space: nowrap; transition: color .15s, border-color .15s;
+}
+.cf-compare::after { content: "compare"; }
+.folio-reveal[open] .cf-compare::after { content: "hide"; }
+.folio-reveal > summary:hover .cf-compare { color: var(--ink); border-color: var(--accent); }
+
+/* the witness: whole passage muted; the line-through falls only on what changed */
+.verse.verse-original { color: var(--struck); margin-top: 20px; }
+.verse.verse-original .struck {
+  text-decoration: line-through; text-decoration-thickness: 1px; text-decoration-color: var(--struck);
+}

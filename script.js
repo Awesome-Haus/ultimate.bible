@@ -172,4 +172,64 @@
     });
     light(sections[0].id); // first paint
   }
+
+  /* ---------------- 4. compare reveal (subtle animation) ---------------- */
+  /* The <details> opens/closes instantly on its own (and with JS off). Here we
+     ease it: the panel's height eases open/shut while the original cross-fades
+     and drifts a few px. prefers-reduced-motion leaves the instant toggle alone. */
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var hasWAAPI = typeof Element !== "undefined" && Element.prototype && typeof Element.prototype.animate === "function";
+  var EASE = "cubic-bezier(.4, 0, .2, 1)";
+
+  if (!reduceMotion && hasWAAPI) {
+    Array.prototype.forEach.call(document.querySelectorAll("details.folio-reveal"), function (d) {
+      var summary = d.querySelector("summary");
+      var content = d.querySelector(".verse-original");
+      if (!summary || !content) return;
+      var heightAnim = null;
+      var contentAnim = null;
+
+      var settle = function (openState) {
+        d.open = openState;
+        d.style.height = "";
+        d.style.overflow = "";
+        heightAnim = null;
+      };
+
+      var run = function (from, to, willOpen) {
+        if (heightAnim) heightAnim.cancel();
+        if (contentAnim) contentAnim.cancel();
+        d.style.overflow = "hidden";
+        d.style.height = from + "px";
+        heightAnim = d.animate(
+          { height: [from + "px", to + "px"] },
+          { duration: willOpen ? 300 : 220, easing: EASE }
+        );
+        contentAnim = content.animate(
+          {
+            opacity: willOpen ? [0, 1] : [1, 0],
+            transform: willOpen
+              ? ["translateY(-6px)", "translateY(0)"]
+              : ["translateY(0)", "translateY(-6px)"]
+          },
+          { duration: willOpen ? 300 : 180, easing: EASE }
+        );
+        heightAnim.onfinish = function () { settle(willOpen); };
+        heightAnim.oncancel = function () { heightAnim = null; };
+      };
+
+      summary.addEventListener("click", function (e) {
+        e.preventDefault();
+        if (!d.open) {
+          var startO = d.offsetHeight; // collapsed (summary only)
+          d.open = true;               // render content so we can measure it
+          var endO = d.offsetHeight;   // full natural height
+          run(startO, endO, true);
+        } else {
+          var startC = d.offsetHeight;     // full
+          run(startC, summary.offsetHeight, false); // ease down to the summary
+        }
+      });
+    });
+  }
 })();
