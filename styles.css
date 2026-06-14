@@ -201,7 +201,7 @@ a.book-row:visited { color: inherit; }
   color: var(--ink-soft); white-space: nowrap; transition: color .15s, border-color .15s;
 }
 .cf-compare::after { content: "compare"; }
-.folio-reveal[open] .cf-compare::after { content: "hide"; }
+.folio-reveal[open] .cf-compare::after { content: "return"; }
 .folio-reveal > summary:hover .cf-compare { color: var(--ink); border-color: var(--accent); }
 
 /* the witness: whole passage muted; the line-through falls only on what changed */
