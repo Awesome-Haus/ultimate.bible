@@ -1,7 +1,13 @@
 # ultimate.bible — the canon
 #
 # This file IS the content. Edit it to add, change, or feature a passage.
-# The app reads it at load; nothing else holds the canon.
+# Nothing else holds the canon.
+#
+# >>> TWO STEPS TO PUBLISH (the site is a STATIC build) <<<
+#   1. Edit this file.
+#   2. Run:  node build.js   — regenerates index.html from this file.
+#   Then commit BOTH canon.txt and index.html. Editing here alone changes
+#   nothing on the page until you rebuild. (Verify: node _test/parser.test.cjs)
 #
 # FORMAT (blank line between blocks):
 #   == Source @Testament ==     a source header; @Testament is its DEFAULT testament (optional)
