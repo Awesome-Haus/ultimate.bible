@@ -16,7 +16,7 @@ Reason, Revelation, Law, Enlightenment, Imagination.
 - [`SOURCES.md`](SOURCES.md) holds the receipts: every original verified against a
   named public-domain edition, under seven ratified editorial conventions.
 - [`llms.txt`](llms.txt) states the method for machine readers.
-- One page, set in stone: the canon beneath the Ultimatum rose window, with the
+- One page, set in light: the canon beneath the Ultimatum rose window, with the
   Weave suite playing once through; its button's edge is the progress ring. Tap a
   verse to compare the original — only the renewed words struck.
 - The one runtime script, [`script.js`](script.js), carries the theme, the chant,

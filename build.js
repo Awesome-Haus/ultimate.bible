@@ -83,7 +83,7 @@ const slug = (n) => "testament-" + String(n).toLowerCase().replace(/[^a-z0-9]+/g
 // The original passage, reconstructed from the segments: unchanged words pass
 // through (muted by the parent), only the RENEWED words are wrapped to be
 // struck. nipWidows is skipped here — the original is the muted witness, not
-// the carved line. Newlines survive (collapse like the renewed text does).
+// the renewed line. Newlines survive (collapse like the renewed text does).
 function renderOriginal(segs) {
   return segs
     .map((s) => (s.type === "keep" ? esc(s.text) : `<span class="struck">${esc(s.old)}</span>`))
@@ -104,10 +104,10 @@ function renderFolio(r) {
         </li>`;
   }
 
-  // Set in stone by default; tap the verse to unfold the original beneath it —
+  // Set in light by default; tap the verse to unfold the original beneath it —
   // muted, with only the renewed words struck. Native <details>: no JS, instant,
-  // accessible (keyboard + screen reader), works with JS off. The carved
-  // (renewed) line stays put; the witness appears below it.
+  // accessible (keyboard + screen reader), works with JS off. The renewed line
+  // stays put; the witness appears below it.
   return `        <li class="cfolio">
           <details class="folio-reveal">
             <summary>
