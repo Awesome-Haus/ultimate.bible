@@ -209,3 +209,27 @@ a.book-row:visited { color: inherit; }
 .verse.verse-original .struck {
   text-decoration: line-through; text-decoration-thickness: 1px; text-decoration-color: var(--struck);
 }
+
+/* ---------------- the Council bar (pinned foot) ---------------- */
+/* A flex child of .root, so it holds the foot of the viewport while the
+   canon scrolls above it — no position:fixed, no overlap. Mirrors the
+   masthead's hairline border. Two calls to the Council, each gold-marked. */
+.council-bar {
+  flex: 0 0 auto; display: flex; align-items: center; justify-content: center;
+  flex-wrap: wrap; gap: clamp(14px, 4vw, 40px);
+  padding: 15px clamp(20px, 5vw, 64px); border-top: 1px solid var(--line);
+}
+.council-link {
+  display: inline-flex; align-items: center; gap: 11px; text-decoration: none;
+  color: var(--ink-soft); font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.22em; text-transform: uppercase; transition: color .18s;
+}
+.council-link .ref-mark { transition: width .18s; }
+.council-link:hover { color: var(--ink); }
+.council-link:hover .ref-mark { width: 34px; }
+.council-link:focus-visible { outline: 1px solid var(--accent); outline-offset: 6px; }
+.council-sep { width: 1px; height: 16px; background: var(--line); }
+@media (max-width: 880px) {
+  .council-sep { display: none; }
+  .council-bar { gap: 8px 0; padding: 12px 20px; }
+}
