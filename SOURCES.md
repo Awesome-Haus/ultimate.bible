@@ -82,10 +82,10 @@ public-domain translation; for English-language sources, the authoritative editi
 - Renewed: *Know yourself.*
 - Verified: the Delphic maxim, γνῶθι σεαυτόν.
 
-**Matthew 7:15-20** — King James Version · *featured* · 4 renewals
+**Matthew 7:15-20** — King James Version · *featured* · 6 renewals
 - Original: *Beware of false prophets, which come to you in sheep's clothing, but inwardly they are ravening wolves. Ye shall know them by their fruits. Do men gather grapes of thorns, or figs of thistles? Even so every good tree bringeth forth good fruit; but a corrupt tree bringeth forth evil fruit. A good tree cannot bring forth evil fruit, neither can a corrupt tree bring forth good fruit. Every tree that bringeth not forth good fruit is hewn down, and cast into the fire. Wherefore by their fruits ye shall know them.*
-- Renewed: *Beware of the liars, which come to you in sheep's clothing, but inwardly they are ravening parasites. Ye shall know them by their fruits. Do people gather grapes of thorns, or figs of thistles? Even so every good tree bringeth forth good fruit; but a corrupt tree bringeth forth evil fruit. A good tree cannot bring forth evil fruit, neither can a corrupt tree bring forth good fruit. Every tree that bringeth not forth good fruit is hewn down, and cast into the fire. Wherefore by their fruits ye shall know them.*
-- Verified: KJV, exact. The fruit-test is kept verbatim — the renewal sharpens only *who* is judged: false prophets→the liars and wolves→parasites name the predator plainly, and men→people opens the proverb to all. *How* they are known — by their fruits — stands untouched.
+- Renewed: *Beware of the liars, which come to you cloaked in falsehoods, for inwardly they are ravening parasites. Ye shall know them by their fruits. Do people gather grapes of thorns, or figs of thistles? Even so every good tree bringeth forth good fruit; but a corrupt tree bringeth forth evil fruit. A good tree cannot bring forth evil fruit, neither can a corrupt tree bring forth good fruit. Every tree that bringeth not forth good fruit is hewn down, and cast into the fire. Wherefore by their fruits ye shall know them.*
+- Verified: KJV, exact. The fruit-test is kept verbatim — the renewal sharpens only *who* is judged and how they hide: false prophets→the liars and wolves→parasites name the predator plainly, in sheep's clothing→cloaked in falsehoods names the disguise, but→for makes the inward truth the *reason* they are known, and men→people opens the proverb to all. *How* they are known — by their fruits — stands untouched.
 
 ## Revelation
 
