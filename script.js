@@ -232,4 +232,31 @@
       });
     });
   }
+
+  /* ---------------- 5. council modal ---------------- */
+  /* Open a submission form over the canon in a native <dialog> instead of a
+     new tab. Progressive enhancement: without <dialog> support (or JS off)
+     the footer links open the form normally. The iframe is loaded on open
+     and unloaded on close so the form isn't running in the background. */
+  var cmDlg = document.getElementById("council-modal");
+  if (cmDlg && typeof cmDlg.showModal === "function") {
+    var cmFrame = cmDlg.querySelector(".cm-iframe");
+    var cmClose = cmDlg.querySelector(".cm-close");
+    Array.prototype.forEach.call(document.querySelectorAll(".council-link"), function (a) {
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        cmFrame.src = a.href;
+        cmDlg.showModal();
+        document.documentElement.style.overflow = "hidden";
+      });
+    });
+    if (cmClose) cmClose.addEventListener("click", function () { cmDlg.close(); });
+    cmDlg.addEventListener("click", function (e) {
+      if (e.target === cmDlg) cmDlg.close(); // click outside the panel
+    });
+    cmDlg.addEventListener("close", function () {
+      cmFrame.src = "about:blank";
+      document.documentElement.style.overflow = "";
+    });
+  }
 })();
