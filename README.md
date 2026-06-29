@@ -4,7 +4,7 @@
 
 A canon of the foundational words of Western civilization, renewed; the word
 that wounds struck, and the word that frees set in its place, with the original
-kept verbatim beneath every turn. Thirty-eight passages across five testaments:
+kept verbatim beneath every turn. Forty passages across five testaments:
 Reason, Revelation, Law, Enlightenment, Imagination.
 
 - [`canon.txt`](canon.txt) **is** the content. Adding a passage is writing three
